@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/template.xhtml">
+
+    <ui:define name="head">
+        <title>CC | Repuestos</title>
+    </ui:define>>
+
+    <ui:define name="body">
+        <h2>Repuestos</h2>
+        <hr></hr>
+        
+        <h:form>
+            <div class="row">
+                <div class="col-4">
+                    <h:outputLabel class="form-label" value="Nombre"/>
+                    <h:inputText class="form-control" value="#{replacementController.replacement.name}"/>
+                </div>
+
+                <div class="col-4">
+                    <h:outputLabel class="form-label" value="Precio X unidad"/>
+                    <h:inputText class="form-control" value="#{replacementController.replacement.price}"/>
+                </div>
+                
+                <div class="col-4">
+                    <h:outputLabel class="form-label" value="Cantidad"/>
+                    <h:inputText class="form-control" value="#{replacementController.replacement.quantity}"/>
+                </div>
+            </div>
+
+            <h:messages></h:messages>
+
+            <br></br>
+
+            <h:commandButton class="btn btn-dark" value="Add" action="#{replacementController.addReplacement()}"/>
+
+            <h:dataTable value="#{replacementController.listReplacement}" var="data">
+
+                <h:column>
+                    <h:outputLabel value="#{data.id}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputLabel value="#{data.name}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputLabel value="#{data.price}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputLabel value="#{data.quantity}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputLabel value="#{data.createdAt}"/>
+                </h:column>
+
+                <h:column>
+                    <h:commandLink class="btn btn-danger" value="Delete" action="#{replacementController.isReplacement(data)}"/>
+                </h:column>
+
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

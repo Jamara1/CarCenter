@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-    <!-- Define Persistence Unit -->
-    <persistence-unit name="my_persistence_unit">
-        
-    </persistence-unit>
+<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <!-- Define Persistence Unit -->
+  <persistence-unit name="my_persistence_unit">
+    <class>com.carcenter.app.controllers.db.TbMechanicService</class>
+    <class>com.carcenter.app.controllers.db.TbReplacementStore</class>
+    <class>com.carcenter.app.controllers.db.TbBill</class>
+    <class>com.carcenter.app.controllers.db.TbStore</class>
+    <class>com.carcenter.app.controllers.db.TbService</class>
+    <class>com.carcenter.app.controllers.db.TbDocumentType</class>
+    <class>com.carcenter.app.controllers.db.TbCar</class>
+    <class>com.carcenter.app.controllers.db.TbBillReplacementStore</class>
+    <class>com.carcenter.app.controllers.db.TbClient</class>
+    <class>com.carcenter.app.controllers.db.TbReplacement</class>
+    <class>com.carcenter.app.controllers.db.TbIncidence</class>
+    <class>com.carcenter.app.controllers.db.TbMechanic</class>
+    <class>com.carcenter.app.models.db.TbReplacement</class>
+    <class>com.carcenter.app.models.db.TbMechanicService</class>
+    <class>com.carcenter.app.models.db.TbDocumentType</class>
+    <class>com.carcenter.app.models.db.TbStore</class>
+    <class>com.carcenter.app.models.db.TbIncidence</class>
+    <class>com.carcenter.app.models.db.TbBill</class>
+    <class>com.carcenter.app.models.db.TbMechanic</class>
+    <class>com.carcenter.app.models.db.TbCar</class>
+    <class>com.carcenter.app.models.db.TbReplacementStore</class>
+    <class>com.carcenter.app.models.db.TbClient</class>
+    <class>com.carcenter.app.models.db.TbBillReplacementStore</class>
+    <class>com.carcenter.app.models.db.TbService</class>
+  </persistence-unit>
 </persistence>

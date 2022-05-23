@@ -17,7 +17,7 @@ public class ClientModel {
     private String secondSurname;
     private int idDocumentType;
     private String documentNumber;
-    private int cellphone;
+    private String cellphone;
     private String address;
     private String email;
     private boolean status;
@@ -80,11 +80,11 @@ public class ClientModel {
         this.documentNumber = documentNumber;
     }
 
-    public int getCellphone() {
+    public String getCellphone() {
         return cellphone;
     }
 
-    public void setCellphone(int cellphone) {
+    public void setCellphone(String cellphone) {
         this.cellphone = cellphone;
     }
 
@@ -131,6 +131,9 @@ public class ClientModel {
     
     
     public String getFullName(ClientModel client) {
+        if(client == null) {
+            return "";
+        }
         return client.getFirstName() + " " + 
                  (!client.getLastName().equals("") ? client.getLastName() + " " : "")
                  + client.getFirstSurname() + " " +

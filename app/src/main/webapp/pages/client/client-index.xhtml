@@ -11,16 +11,15 @@
     </ui:define>>
 
     <ui:define name="body">
-        <h1>Clientes</h1>
+        <h2>Clientes</h2>
         <hr></hr>
-        <h:form>
 
+        <h:form>
             <div class="row">
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Tipo de documento: "/>
-                    <br></br>
                     <h:selectOneMenu class="col-12 form-select" value="#{clientController.client.idDocumentType}">
-                        <f:selectItem itemLabel="Seleccione..."/>
+                        <f:selectItem itemLabel="Seleccione..." itemValue="#{null}" noSelectionOption="true"/>
                         <f:selectItems value="#{documentTypeController.listDocumentType}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
                     </h:selectOneMenu>
 
@@ -61,33 +60,38 @@
             <h:dataTable value="#{clientController.listClient}" var="data">
 
                 <h:column>
+                    <f:facet name="header">Id</f:facet>
                     <h:outputLabel value="#{data.id}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Documento</f:facet>
                     <h:outputLabel value="#{data.documentNumber}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Nombre</f:facet>
                     <h:outputLabel value="#{clientModel.getFullName(data)}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Celular</f:facet>
                     <h:outputLabel value="#{data.cellphone}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">E-mail</f:facet>
                     <h:outputLabel value="#{data.email}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Fecha creación</f:facet>
                     <h:outputLabel value="#{data.createdAt}"/>
                 </h:column>
 
                 <h:column>
                     <h:commandLink class="btn btn-danger" value="Delete" action="#{clientController.isClient(data)}"/>
                 </h:column>
-
             </h:dataTable>
         </h:form>
     </ui:define>

@@ -11,42 +11,44 @@
     </ui:define>>
 
     <ui:define name="body">
-        <h1>Mecanicos</h1>
+        <h2>Mecanicos</h2>
+        <hr></hr>
+        
         <h:form>
             <div class="row">
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Tipo de documento: "/>
                     <br></br>
-                    <h:selectOneMenu class="col-12 form-select" value="#{clientController.client.idDocumentType}">
+                    <h:selectOneMenu class="col-12 form-select" value="#{mechanicController.mechanic.idDocumentType}">
                         <f:selectItem itemLabel="Seleccione..."/>
                         <f:selectItems value="#{documentTypeController.listDocumentType}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
                     </h:selectOneMenu>
 
                     <h:outputLabel class="form-label" value="Primer nombre: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.firstName}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.firstName}"/>
 
                     <h:outputLabel class="form-label" value="Primer apellido: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.firstSurname}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.firstSurname}"/>
 
                     <h:outputLabel class="form-label" value="Celular: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.cellphone}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.cellphone}"/>
 
                     <h:outputLabel class="form-label" value="E-mail: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.email}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.email}"/>
                 </div>
 
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Numero de documento: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.documentNumber}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.documentNumber}"/>
 
                     <h:outputLabel class="form-label" value="Segundo nombre: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.lastName}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.lastName}"/>
 
                     <h:outputLabel class="form-label" value="Segundo apellido: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.secondSurname}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.secondSurname}"/>
 
                     <h:outputLabel class="form-label" value="Dirección: "/>
-                    <h:inputText class="form-control" value="#{clientController.client.address}"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.address}"/>
                 </div>
             </div>
 
@@ -54,9 +56,9 @@
 
             <br></br>
 
-            <h:commandButton class="btn btn-dark" value="Add" action="#{clientController.addClient()}"/>
+            <h:commandButton class="btn btn-dark" value="Add" action="#{mechanicController.addMechanic()}"/>
 
-            <h:dataTable value="#{clientController.listClient}" var="data">
+            <h:dataTable value="#{mechanicController.listMechanic}" var="data">
 
                 <h:column>
                     <h:outputLabel value="#{data.id}"/>
@@ -67,7 +69,7 @@
                 </h:column>
                 
                 <h:column>
-                    <h:outputLabel value="#{clientModel.getFullName(data)}"/>
+                    <h:outputLabel value="#{mechanicModel.getFullName(data)}"/>
                 </h:column>
 
                 <h:column>
@@ -83,7 +85,7 @@
                 </h:column>
 
                 <h:column>
-                    <h:commandLink class="btn btn-danger" value="Delete" action="#{clientController.isClient(data)}"/>
+                    <h:commandLink class="btn btn-danger" value="Delete" action="#{mechanicController.isMechanic(data)}"/>
                 </h:column>
 
             </h:dataTable>

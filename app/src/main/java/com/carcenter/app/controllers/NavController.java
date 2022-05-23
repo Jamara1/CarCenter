@@ -35,4 +35,12 @@ public class NavController {
     public String showCar() {
         return "cars";
     }
+    
+    public String showSite() {
+        return "sites";
+    }
+    
+    public String showReplacement() {
+        return "replacements";
+    }
 }

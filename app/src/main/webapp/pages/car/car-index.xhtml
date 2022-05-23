@@ -3,37 +3,62 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      template="/template/template.xhtml">
+      template="/template/template.xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="head">
         <title>CC | Carros</title>
     </ui:define>
 
     <ui:define name="body">
-        <h1>Carros</h1>
+        <h2>Carros</h2>
+        <hr></hr>
         
         <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel class="form-label" value="Name:"/>
-                <h:inputText class="form-control" value="#{documentTypeController.documentType.typeName}"/>
-            </h:panelGrid>
+            <div class="row">
+                <div class="col-12">
+                    <h:outputLabel class="form-label" value="Cliente"/>
+                    <h:selectOneMenu class="col-12 form-select" value="#{carController.car.idClient}">
+                        <f:selectItem itemLabel="Seleccione..." itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{clientController.listClient}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{clientModel.getFullName(data)}"/>
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="col-6">
+                    <h:outputLabel class="form-label" value="Placa"/>
+                    <h:inputText class="form-control" value="#{carController.car.placa}"/>
+                </div>
+                
+                <div class="col-6">
+                    <h:outputLabel class="form-label" value="Marca"/>
+                    <h:inputText class="form-control" value="#{carController.car.brand}"/>
+                </div>
+            </div>
 
             <h:messages></h:messages>
 
             <br></br>
 
-            <h:commandButton class="btn btn-dark" value="Add" action="#{documentTypeController.addDocumentType()}"/>
+            <h:commandButton class="btn btn-dark" value="Add" action="#{carController.addCar()}"/>
 
-            <h:dataTable value="#{documentTypeController.listDocumentType}" var="data">
+            <h:dataTable value="#{carController.listCar}" var="data">
 
                 <h:column>
                     <h:outputLabel value="#{data.id}"/>
                 </h:column>
 
                 <h:column>
-                    <h:outputLabel value="#{data.typeName}"/>
+                    <h:outputLabel value="#{data.idClient}"/>
                 </h:column>
 
+                <h:column>
+                    <h:outputLabel value="#{data.placa}"/>
+                </h:column>
+                
+                <h:column>
+                    <h:outputLabel value="#{data.brand}"/>
+                </h:column>
+                
                 <h:column>
                     <h:outputLabel value="#{data.createdAt}"/>
                 </h:column>
