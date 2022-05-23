@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <ui:insert name="head"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></link>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <h:commandLink class="navbar-brand" value="CCenter" action="#{nav.showHome}"></h:commandLink>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Personas
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <h:commandLink class="dropdown-item" value="Clientes" action="#{nav.showClient}"></h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink class="dropdown-item" value="Mecanicos" action="#{nav.showMechanic}"></h:commandLink>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></hr></li>
+                                    <li>
+                                        <h:commandLink class="dropdown-item" value="Tipo documento" action="#{nav.showDocument}"></h:commandLink>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Almacén
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <h:commandLink class="dropdown-item" value="Sedes" action="#{nav.showClient}"></h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink class="dropdown-item" value="Repuestos" action="pages/mechanic/mechanic-index"></h:commandLink>
+                                    </li>
+                                </ul>
+                            </li>                          
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Carros" action="#{nav.showCar}"></h:commandLink>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Incidencias" action="pages/car/car-index"></h:commandLink>
+                            </li>  
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Facturas" action="pages/car/car-index"></h:commandLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </h:form>
+
+        <div class="container my-4">
+            <ui:insert name="body"/>
+        </div>
+    </h:body>
+</html>
+

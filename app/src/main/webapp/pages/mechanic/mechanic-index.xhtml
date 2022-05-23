@@ -1,12 +1,93 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h1>Mechanics</h1>
-    </h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/template/template.xhtml">
+    
+    <ui:define name="head">
+        <title>CC | Mecanicos</title>
+    </ui:define>>
+
+    <ui:define name="body">
+        <h1>Mecanicos</h1>
+        <h:form>
+            <div class="row">
+                <div class="col-6">
+                    <h:outputLabel class="form-label" value="Tipo de documento: "/>
+                    <br></br>
+                    <h:selectOneMenu class="col-12 form-select" value="#{clientController.client.idDocumentType}">
+                        <f:selectItem itemLabel="Seleccione..."/>
+                        <f:selectItems value="#{documentTypeController.listDocumentType}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel class="form-label" value="Primer nombre: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.firstName}"/>
+
+                    <h:outputLabel class="form-label" value="Primer apellido: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.firstSurname}"/>
+
+                    <h:outputLabel class="form-label" value="Celular: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.cellphone}"/>
+
+                    <h:outputLabel class="form-label" value="E-mail: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.email}"/>
+                </div>
+
+                <div class="col-6">
+                    <h:outputLabel class="form-label" value="Numero de documento: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.documentNumber}"/>
+
+                    <h:outputLabel class="form-label" value="Segundo nombre: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.lastName}"/>
+
+                    <h:outputLabel class="form-label" value="Segundo apellido: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.secondSurname}"/>
+
+                    <h:outputLabel class="form-label" value="Dirección: "/>
+                    <h:inputText class="form-control" value="#{clientController.client.address}"/>
+                </div>
+            </div>
+
+            <h:messages></h:messages>
+
+            <br></br>
+
+            <h:commandButton class="btn btn-dark" value="Add" action="#{clientController.addClient()}"/>
+
+            <h:dataTable value="#{clientController.listClient}" var="data">
+
+                <h:column>
+                    <h:outputLabel value="#{data.id}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputLabel value="#{data.documentNumber}"/>
+                </h:column>
+                
+                <h:column>
+                    <h:outputLabel value="#{clientModel.getFullName(data)}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputLabel value="#{data.cellphone}"/>
+                </h:column>
+                
+                <h:column>
+                    <h:outputLabel value="#{data.email}"/>
+                </h:column>
+
+                <h:column>
+                    <h:outputLabel value="#{data.createdAt}"/>
+                </h:column>
+
+                <h:column>
+                    <h:commandLink class="btn btn-danger" value="Delete" action="#{clientController.isClient(data)}"/>
+                </h:column>
+
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
 
