@@ -19,7 +19,7 @@
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Tipo de documento: "/>
                     <h:selectOneMenu class="col-12 form-select" value="#{clientController.client.idDocumentType}">
-                        <f:selectItem itemLabel="Seleccione..." itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="Seleccione..." itemValue="#{null}" noSelectionOption="false"/>
                         <f:selectItems value="#{documentTypeController.listDocumentType}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
                     </h:selectOneMenu>
 

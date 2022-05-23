@@ -24,51 +24,70 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
 
+    <!-- ::::: Routes ::::: -->
+    <!-- Home -->
     <navigation-rule>
         <from-view-id>*</from-view-id>
-        
-        <!-- ::::: Routes ::::: -->
-        <!-- Home -->
         <navigation-case>
             <from-action>#{nav.showHome}</from-action>
             <from-outcome>home</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
-        
-        <!-- People -->
+    </navigation-rule>
+    
+    <!-- Document type -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-action>#{nav.showDocument}</from-action>
             <from-outcome>documents</from-outcome>
             <to-view-id>/pages/document/document-type-index.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>
         
+    <!-- Clients -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-action>#{nav.showClient}</from-action>
             <from-outcome>clients</from-outcome>
             <to-view-id>/pages/client/client-index.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>
         
+    <!-- Mechanics -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-action>#{nav.showMechanic}</from-action>
             <from-outcome>mechanics</from-outcome>
             <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
         </navigation-case>
-        
-        <!-- Cars -->
+    </navigation-rule>
+
+    <!-- Cars -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-action>#{nav.showCar}</from-action>
             <from-outcome>cars</from-outcome>
             <to-view-id>/pages/car/car-index.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>
         
-        <!-- Sites -->
+    <!-- Sites -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-action>#{nav.showSite}</from-action>
             <from-outcome>sites</from-outcome>
             <to-view-id>/pages/site/site-index.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>
         
-        <!-- Replacements -->
+    <!-- Replacements -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-action>#{nav.showReplacement}</from-action>
             <from-outcome>replacements</from-outcome>
@@ -153,350 +172,4 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <!-- ::::: End beans ::::: -->
-    <application>
-        <el-resolver>com.carcenter.app.jsf_classes.util.JsfCrudELResolver</el-resolver>
-    </application>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>welcome</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBill_create</from-outcome>
-            <to-view-id>/pages2/tbBill/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBill_list</from-outcome>
-            <to-view-id>/pages2/tbBill/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBill_edit</from-outcome>
-            <to-view-id>/pages2/tbBill/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBill_detail</from-outcome>
-            <to-view-id>/pages2/tbBill/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBillReplacementStore_create</from-outcome>
-            <to-view-id>/pages2/tbBillReplacementStore/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBillReplacementStore_list</from-outcome>
-            <to-view-id>/pages2/tbBillReplacementStore/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBillReplacementStore_edit</from-outcome>
-            <to-view-id>/pages2/tbBillReplacementStore/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbBillReplacementStore_detail</from-outcome>
-            <to-view-id>/pages2/tbBillReplacementStore/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbCar_create</from-outcome>
-            <to-view-id>/pages2/tbCar/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbCar_list</from-outcome>
-            <to-view-id>/pages2/tbCar/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbCar_edit</from-outcome>
-            <to-view-id>/pages2/tbCar/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbCar_detail</from-outcome>
-            <to-view-id>/pages2/tbCar/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbClient_create</from-outcome>
-            <to-view-id>/pages2/tbClient/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbClient_list</from-outcome>
-            <to-view-id>/pages2/tbClient/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbClient_edit</from-outcome>
-            <to-view-id>/pages2/tbClient/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbClient_detail</from-outcome>
-            <to-view-id>/pages2/tbClient/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbDocumentType_create</from-outcome>
-            <to-view-id>/pages2/tbDocumentType/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbDocumentType_list</from-outcome>
-            <to-view-id>/pages2/tbDocumentType/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbDocumentType_edit</from-outcome>
-            <to-view-id>/pages2/tbDocumentType/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbDocumentType_detail</from-outcome>
-            <to-view-id>/pages2/tbDocumentType/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbIncidence_create</from-outcome>
-            <to-view-id>/pages2/tbIncidence/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbIncidence_list</from-outcome>
-            <to-view-id>/pages2/tbIncidence/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbIncidence_edit</from-outcome>
-            <to-view-id>/pages2/tbIncidence/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbIncidence_detail</from-outcome>
-            <to-view-id>/pages2/tbIncidence/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanic_create</from-outcome>
-            <to-view-id>/pages2/tbMechanic/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanic_list</from-outcome>
-            <to-view-id>/pages2/tbMechanic/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanic_edit</from-outcome>
-            <to-view-id>/pages2/tbMechanic/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanic_detail</from-outcome>
-            <to-view-id>/pages2/tbMechanic/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanicService_create</from-outcome>
-            <to-view-id>/pages2/tbMechanicService/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanicService_list</from-outcome>
-            <to-view-id>/pages2/tbMechanicService/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanicService_edit</from-outcome>
-            <to-view-id>/pages2/tbMechanicService/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbMechanicService_detail</from-outcome>
-            <to-view-id>/pages2/tbMechanicService/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacement_create</from-outcome>
-            <to-view-id>/pages2/tbReplacement/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacement_list</from-outcome>
-            <to-view-id>/pages2/tbReplacement/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacement_edit</from-outcome>
-            <to-view-id>/pages2/tbReplacement/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacement_detail</from-outcome>
-            <to-view-id>/pages2/tbReplacement/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacementStore_create</from-outcome>
-            <to-view-id>/pages2/tbReplacementStore/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacementStore_list</from-outcome>
-            <to-view-id>/pages2/tbReplacementStore/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacementStore_edit</from-outcome>
-            <to-view-id>/pages2/tbReplacementStore/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbReplacementStore_detail</from-outcome>
-            <to-view-id>/pages2/tbReplacementStore/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbService_create</from-outcome>
-            <to-view-id>/pages2/tbService/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbService_list</from-outcome>
-            <to-view-id>/pages2/tbService/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbService_edit</from-outcome>
-            <to-view-id>/pages2/tbService/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbService_detail</from-outcome>
-            <to-view-id>/pages2/tbService/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbStore_create</from-outcome>
-            <to-view-id>/pages2/tbStore/New.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbStore_list</from-outcome>
-            <to-view-id>/pages2/tbStore/List.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbStore_edit</from-outcome>
-            <to-view-id>/pages2/tbStore/Edit.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>tbStore_detail</from-outcome>
-            <to-view-id>/pages2/tbStore/Detail.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
 </faces-config>
