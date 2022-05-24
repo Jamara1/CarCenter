@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package navigations;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,9 +12,9 @@ import javax.faces.bean.SessionScoped;
  *
  * @author jamar
  */
-@ManagedBean(name = "nav")
+@ManagedBean(name = "listNav")
 @SessionScoped
-public class NavController {
+public class ListNav {
     
     public String showHome() {
         return "home";

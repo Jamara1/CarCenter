@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import models.ClientModel;
+import navigations.ListNav;
 
 /**
  *
@@ -22,26 +23,40 @@ import models.ClientModel;
 @RequestScoped
 public class ClientController {
 
+    /* Data */
+    private static final ArrayList<ClientModel> listClient = new ArrayList<>();
+    private ClientModel client = new ClientModel();
+
+    /* SQL */
     PreparedStatement ps;
     ResultSet rs;
     ConnectionController connectionDb = new ConnectionController();
     Connection conn;
     String sql;
 
-    private static final ArrayList<ClientModel> listClient = new ArrayList<>();
-    private ClientModel client = new ClientModel();
+    /* Navigation */
+    ListNav listNav = new ListNav();
 
+    /* Getter & Setters */
+    public ClientModel getClient() {
+        return client;
+    }
+
+    public void setClient(ClientModel client) {
+        this.client = client;
+    }
+
+    /* Methods */
     public ArrayList<ClientModel> getClients() throws SQLException {
         listClient.clear();
         sql = "SELECT * FROM TB_CLIENT ORDER BY ID_CLIENT ASC";
         int i = 1;
-        
+
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
-                        
             while (rs.next()) {
                 ClientModel c = new ClientModel();
                 c.setIndex(i++);
@@ -75,25 +90,17 @@ public class ClientController {
 
         return ClientController.listClient;
     }
-    
-    public ClientModel getClient() {
-        return client;
-    }
-    
-    public void setClient(ClientModel client) {
-        this.client = client;
-    }
-    
+
     public boolean isClient(ClientModel client) {
         return true;
     }
-    
+
     public void addClient() throws SQLException {
-        
+
         if (this.client == null) {
             return;
         }
-        
+
         sql = "INSERT INTO JAMARA.TB_CLIENT "
                 + "(FIRST_NAME, LAST_NAME, FIRST_SURNAME, SECOND_SURNAME, ID_DOCUMENT_TYPE, DOCUMENT_NUMBER, CELLPHONE, ADDRESS, EMAIL)"
                 + " VALUES"
@@ -112,6 +119,7 @@ public class ClientController {
             ps.setString(8, this.client.getAddress());
             ps.setString(9, this.client.getEmail());
             ps.executeUpdate();
+
             this.client = null;
         } catch (SQLException e) {
             System.out.println(e);
@@ -119,5 +127,60 @@ public class ClientController {
             conn.close();
         }
     }
+    
+    public void updateClient(ClientModel client) throws SQLException {
 
+        if (this.client == null) {
+            return;
+        }
+
+        sql = "UPDATE JAMARA.TB_CLIENT SET FIRST_NAME = ?, LAST_NAME = ?, "
+                + "FIRST_SURNAME = ?, SECOND_SURNAME = ?, ID_DOCUMENT_TYPE = ?, "
+                + "DOCUMENT_NUMBER = ?, CELLPHONE = ?, ADDRESS = ?, "
+                + "EMAIL = ?, UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_CLIENT = ?";
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(2, client.getFirstName());
+            ps.setString(3, client.getLastName());
+            ps.setString(4, client.getFirstSurname());
+            ps.setString(5, client.getSecondSurname());
+            ps.setInt(6, client.getIdDocumentType());
+            ps.setString(7, client.getDocumentNumber());
+            ps.setString(8, client.getCellphone());
+            ps.setString(9, client.getAddress());
+            ps.setString(10, client.getEmail());
+            ps.setInt(1, client.getId());
+            ps.executeUpdate();
+
+            this.client = null;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
+    }
+    
+    public void isClientEnable(ClientModel client) throws SQLException {
+        if (client == null) {
+            return;
+        }
+
+        sql = "UPDATE JAMARA.TB_CLIENT SET STATUS = ? WHERE ID_CLIENT = ?";
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setBoolean(2, !client.isStatus());
+            ps.setInt(1, client.getId());
+            ps.executeUpdate();
+
+            this.client = null;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
+    }
 }

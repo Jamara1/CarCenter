@@ -21,7 +21,7 @@
         <h:form>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <h:commandLink class="navbar-brand" value="CCenter" action="#{nav.showHome}"></h:commandLink>
+                    <h:commandLink class="navbar-brand" value="CCenter" action="#{listNav.showHome}"></h:commandLink>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -33,14 +33,14 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <h:commandLink class="dropdown-item" value="Clientes" action="#{nav.showClient}"></h:commandLink>
+                                        <h:commandLink class="dropdown-item" value="Clientes" action="#{listNav.showClient}"></h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink class="dropdown-item" value="Mecanicos" action="#{nav.showMechanic}"></h:commandLink>
+                                        <h:commandLink class="dropdown-item" value="Mecanicos" action="#{listNav.showMechanic}"></h:commandLink>
                                     </li>
                                     <li><hr class="dropdown-divider"></hr></li>
                                     <li>
-                                        <h:commandLink class="dropdown-item" value="Tipo documento" action="#{nav.showDocument}"></h:commandLink>
+                                        <h:commandLink class="dropdown-item" value="Tipo documento" action="#{listNav.showDocument}"></h:commandLink>
                                     </li>
                                 </ul>
                             </li>
@@ -51,15 +51,15 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <h:commandLink class="dropdown-item" value="Sedes" action="#{nav.showSite}"></h:commandLink>
+                                        <h:commandLink class="dropdown-item" value="Sedes" action="#{listNav.showSite}"></h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink class="dropdown-item" value="Repuestos" action="#{nav.showReplacement}"></h:commandLink>
+                                        <h:commandLink class="dropdown-item" value="Repuestos" action="#{listNav.showReplacement}"></h:commandLink>
                                     </li>
                                 </ul>
                             </li>                          
                             <li class="nav-item">
-                                <h:commandLink class="nav-link" value="Carros" action="#{nav.showCar}"></h:commandLink>
+                                <h:commandLink class="nav-link" value="Carros" action="#{listNav.showCar}"></h:commandLink>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink class="nav-link" value="Incidencias" action="pages/car/car-index"></h:commandLink>

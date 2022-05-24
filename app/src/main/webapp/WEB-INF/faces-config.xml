@@ -29,7 +29,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{nav.showHome}</from-action>
+            <from-action>#{listNav.showHome}</from-action>
             <from-outcome>home</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
@@ -39,7 +39,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{nav.showDocument}</from-action>
+            <from-action>#{listNav.showDocument}</from-action>
             <from-outcome>documents</from-outcome>
             <to-view-id>/pages/document/document-type-index.xhtml</to-view-id>
         </navigation-case>
@@ -49,9 +49,21 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{nav.showClient}</from-action>
+            <from-action>#{listNav.showClient}</from-action>
             <from-outcome>clients</from-outcome>
             <to-view-id>/pages/client/client-index.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-action>#{createNav.showClientCreate}</from-action>
+            <from-outcome>client-create</from-outcome>
+            <to-view-id>/pages/client/client-create.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-action>#{editNav.showClientEdit}</from-action>
+            <from-outcome>client-edit</from-outcome>
+            <to-view-id>/pages/client/client-edit.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
         
@@ -59,7 +71,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{nav.showMechanic}</from-action>
+            <from-action>#{listNav.showMechanic}</from-action>
             <from-outcome>mechanics</from-outcome>
             <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
         </navigation-case>
@@ -69,7 +81,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{nav.showCar}</from-action>
+            <from-action>#{listNav.showCar}</from-action>
             <from-outcome>cars</from-outcome>
             <to-view-id>/pages/car/car-index.xhtml</to-view-id>
         </navigation-case>
@@ -79,7 +91,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{nav.showSite}</from-action>
+            <from-action>#{listNav.showSite}</from-action>
             <from-outcome>sites</from-outcome>
             <to-view-id>/pages/site/site-index.xhtml</to-view-id>
         </navigation-case>
@@ -89,7 +101,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{nav.showReplacement}</from-action>
+            <from-action>#{listNav.showReplacement}</from-action>
             <from-outcome>replacements</from-outcome>
             <to-view-id>/pages/replacement/replacement-index.xhtml</to-view-id>
         </navigation-case>
