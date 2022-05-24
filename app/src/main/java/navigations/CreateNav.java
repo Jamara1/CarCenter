@@ -20,27 +20,27 @@ public class CreateNav {
         return "home";
     }
 
-    public String showDocument() {
-        return "documents";
+    public String showDocumentCreate() {
+        return "document-create";
     }
 
     public String showClientCreate() {
         return "client-create";
     }
 
-    public String showMechanic() {
-        return "mechanics";
+    public String showMechanicCreate() {
+        return "mechanic-create";
     }
     
-    public String showCar() {
-        return "cars";
+    public String showCarCreate() {
+        return "car-create";
     }
     
-    public String showSite() {
-        return "sites";
+    public String showSiteCreate() {
+        return "site-create";
     }
     
-    public String showReplacement() {
-        return "replacements";
+    public String showReplacementCreate() {
+        return "replacement-create";
     }
 }

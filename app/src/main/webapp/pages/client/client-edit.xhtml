@@ -12,14 +12,20 @@
     </ui:define>>
 
     <ui:define name="body">
-        <div class="w-100">
-            <h2>Editar cliente</h2>
+        <div class="row">
+            <div class="col-6">
+                <h2>Editar cliente</h2>
+            </div>
+            <div class="col-6 mt-1 text-end">
             <h:form>
                 <h:commandLink class="btn btn-danger" value="Regresar" action="#{listNav.showClient}"/>
             </h:form>
+            </div>
         </div>
         <hr></hr>
 
+        <h:outputLabel value="#{clientController.client.firstName}"/>
+        
         <h:form>
             <div class="row my-4">
                 <div class="col-6">
@@ -61,7 +67,7 @@
                 </div>
 
                 <div class="col-12 mt-4">
-                    <h:commandButton class="w-100 btn btn-dark mt-2" value="Agregar" action="#{clientController.addClient()}">
+                    <h:commandButton class="w-100 btn btn-dark mt-2" value="Editar" action="#{clientController.updateClient(client)}">
                         <i class="fa-solid fa-paper-plane-top"></i>
                     </h:commandButton>
                 </div>

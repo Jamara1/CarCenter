@@ -5,11 +5,16 @@
  */
 package models;
 
+import java.sql.Date;
+
 /**
  *
  * @author jamar
  */
 public class MechanicModel {
+    
+    private int index;
+    
     private int id;
     private String firstName;
     private String lastName;
@@ -21,9 +26,19 @@ public class MechanicModel {
     private String address;
     private String email;
     private boolean status;
-    private String createdAt;
-    private String updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
+    
+    private String fullName;
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
     public int getId() {
         return id;
     }
@@ -112,27 +127,36 @@ public class MechanicModel {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public String getFullName(MechanicModel client) {
-        return client.getFirstName() + " " + 
-                 (!client.getLastName().equals("") ? client.getLastName() + " " : "")
-                 + client.getFirstSurname() + " " +
-                 (!client.getSecondSurname().equals("") ? client.getSecondSurname() + " " : "");
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+    
+    /* Can be optimized */
+    public String strFullName(String str1, String str2, String str3, String str4) {
+        return str1 + " "
+                + (str2 != null ? str2 + " " : "")
+                + str3 + " "
+                + (str4 != null ? str4 + " " : "");
     }
     
 }

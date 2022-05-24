@@ -10,10 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import models.ClientModel;
-import navigations.ListNav;
 
 /**
  *
@@ -34,12 +35,9 @@ public class ClientController {
     Connection conn;
     String sql;
 
-    /* Navigation */
-    ListNav listNav = new ListNav();
-
     /* Getter & Setters */
     public ClientModel getClient() {
-        return client;
+        return this.client;
     }
 
     public void setClient(ClientModel client) {
@@ -91,10 +89,6 @@ public class ClientController {
         return ClientController.listClient;
     }
 
-    public boolean isClient(ClientModel client) {
-        return true;
-    }
-
     public void addClient() throws SQLException {
 
         if (this.client == null) {
@@ -127,12 +121,14 @@ public class ClientController {
             conn.close();
         }
     }
-    
+
     public void updateClient(ClientModel client) throws SQLException {
 
         if (this.client == null) {
             return;
         }
+
+        System.out.println(client.getFullName());
 
         sql = "UPDATE JAMARA.TB_CLIENT SET FIRST_NAME = ?, LAST_NAME = ?, "
                 + "FIRST_SURNAME = ?, SECOND_SURNAME = ?, ID_DOCUMENT_TYPE = ?, "
@@ -161,7 +157,7 @@ public class ClientController {
             conn.close();
         }
     }
-    
+
     public void isClientEnable(ClientModel client) throws SQLException {
         if (client == null) {
             return;

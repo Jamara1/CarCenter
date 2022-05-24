@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                template="/template/template.xhtml">
+
+    <ui:define name="head">
+        <title>CC | Mechanices</title>
+    </ui:define>
+
+    <ui:define name="body">
+        <div class="row">
+            <div class="col-6">
+                <h2>Crear mecánico</h2>
+            </div>
+            <div class="col-6 mt-1 text-end">
+            <h:form>
+                <h:commandLink class="btn btn-danger" value="Regresar" action="#{listNav.showMechanic}"/>
+            </h:form>
+            </div>
+        </div>
+        <hr></hr>
+
+        <h:form>
+            <div class="row my-4">
+                <div class="col-6">
+                    <h:outputLabel class="form-label" value="Tipo de documento"/>
+                    <h:selectOneMenu class="col-12 form-select" value="#{mechanicController.mechanic.idDocumentType}">
+                        <f:selectItem itemLabel="Seleccione..."/>
+                        <f:selectItems value="#{documentTypeController.documentsTypes}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel class="form-label mt-2" value="Primer nombre"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.firstName}" required="true">
+                        <f:validateLength minimum="3"/>
+                    </h:inputText>
+
+                    <h:outputLabel class="form-label mt-2" value="Primer apellido"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.firstSurname}" required="true">
+                        <f:validateLength minimum="3"/>
+                    </h:inputText>
+
+                    <h:outputLabel class="form-label mt-2" value="Celular"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.cellphone}"/>
+
+                    <h:outputLabel class="form-label mt-2" value="E-mail"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.email}" required="true"/>
+                </div>
+
+                <div class="col-6">
+                    <h:outputLabel class="form-label" value="Numero de documento"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.documentNumber}" required="true"/>
+
+                    <h:outputLabel class="form-label mt-2" value="Segundo nombre"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.lastName}"/>
+
+                    <h:outputLabel class="form-label mt-2" value="Segundo apellido"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.secondSurname}"/>
+
+                    <h:outputLabel class="form-label mt-2" value="Dirección"/>
+                    <h:inputText class="form-control" value="#{mechanicController.mechanic.address}"/>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <h:commandButton class="w-100 btn btn-dark mt-2" value="Agregar" action="#{mechanicController.addMechanic()}">
+                        <i class="fa-solid fa-paper-plane-top"></i>
+                    </h:commandButton>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

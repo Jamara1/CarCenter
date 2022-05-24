@@ -26,7 +26,7 @@
             <h:dataTable class="table" value="#{clientController.clients}" var="client" 
                          rendered="#{clientController.clients.size()>0}">
                 <h:column>
-                    <f:facet name="header">Id</f:facet>
+                    <f:facet name="header">#</f:facet>
                     <h:outputText class="fw-bold" value="#{client.index}"></h:outputText>
                 </h:column>
 
@@ -58,7 +58,8 @@
                 <h:column>
                     <f:facet name="header">Opciones</f:facet>
 
-                    <h:commandLink class="btn btn-success me-2" action="#{editNav.showClientEdit}">
+                    <h:commandLink class="btn btn-success me-2" action="#{editNav.showClientEdit()}">
+                        <f:param name="id" value="#{client.id}"></f:param>
                         <i class="fa-solid fa-edit"></i>
                     </h:commandLink>
                     

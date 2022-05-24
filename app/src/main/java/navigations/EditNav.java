@@ -7,6 +7,7 @@ package navigations;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import models.ClientModel;
 
 /**
  *
@@ -20,27 +21,27 @@ public class EditNav {
         return "home";
     }
 
-    public String showDocument() {
-        return "documents";
+    public String showDocumentEdit() {
+        return "document-edit";
     }
 
     public String showClientEdit() {
         return "client-edit";
     }
 
-    public String showMechanic() {
-        return "mechanics";
+    public String showMechanicEdit() {
+        return "mechanic-edit";
     }
     
-    public String showCar() {
-        return "cars";
+    public String showCarEdit() {
+        return "car-edit";
     }
     
-    public String showSite() {
-        return "sites";
+    public String showSiteEdit() {
+        return "site-edit";
     }
     
-    public String showReplacement() {
-        return "replacements";
+    public String showReplacementEdit() {
+        return "replacement-edi";
     }
 }

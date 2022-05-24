@@ -75,6 +75,18 @@
             <from-outcome>mechanics</from-outcome>
             <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
         </navigation-case>
+        
+        <navigation-case>
+            <from-action>#{createNav.showMechanicCreate}</from-action>
+            <from-outcome>mechanic-create</from-outcome>
+            <to-view-id>/pages/mechanic/mechanic-create.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-action>#{editNav.showMechanicEdit}</from-action>
+            <from-outcome>mechanic-edit</from-outcome>
+            <to-view-id>/pages/mechanic/mechanic-edit.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
 
     <!-- Cars -->
