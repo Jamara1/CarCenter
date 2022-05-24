@@ -21,34 +21,40 @@
                     <h:inputText class="form-control" value="#{documentTypeController.documentType.typeName}"/>
                 </div>
                 <div class="col-1 mt-4 text-end">
-                    <h:commandButton class="btn btn-dark mt-2" value="Add" action="#{documentTypeController.addDocumentType()}"/>
+                    <h:commandLink class="btn btn-dark mt-2" action="#{documentTypeController.addDocumentType()}">
+                        <i class="fa-solid fa-plus"></i>
+                    </h:commandLink>
                 </div>
                 <h:messages></h:messages>
             </div>
-            
+
             <br></br>
 
-            <h:dataTable class="table" value="#{documentTypeController.listDocumentType}" var="data"
-                         rendered="#{documentTypeController.documentsTypes.size()>0}">
+            <h:dataTable class="table" value="#{documentTypeController.documentTypes}" var="document"
+                         rendered="#{documentTypeController.documentTypes.size()>0}">
 
                 <h:column>
                     <f:facet name="header">#</f:facet>
-                    <h:outputLabel class="fw-bold" value="#{data.id}"/>
+                    <h:outputLabel class="fw-bold" value="#{documentType.id}"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Nonmbre</f:facet>
-                    <h:outputLabel value="#{data.typeName}"/>
+                    <f:facet name="header">Nombre</f:facet>
+                    <h:outputLabel value="#{document.typeName}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Fecha creación</f:facet>
-                    <h:outputLabel value="#{data.createdAt}"/>
+                    <h:outputLabel value="#{document.createdAt}"/>
                 </h:column>
 
                 <h:column class="text-center">
                     <f:facet name="header">Opciones</f:facet>
-                    <h:commandLink class="btn btn-primary me-2">
+                    <h:commandLink class="btn btn-success me-2" action="#{documentTypeController.documentType(document)}">
+                        <i class="fa-solid fa-edit"></i>
+                    </h:commandLink>
+
+                    <h:commandLink class="btn btn-danger me-2">
                         <i class="fa-solid fa-trash"></i>
                     </h:commandLink>
                 </h:column>

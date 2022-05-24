@@ -16,11 +16,21 @@ import javax.enterprise.context.Dependent;
 @Dependent
 public class DocumentTypeModel {
 
+    private int index;
+    
     private int id;
     private String typeName;
     private Date createdAt;
     private Date updatedAt;
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
     public int getId() {
         return id;
     }

@@ -30,7 +30,7 @@
                     <h:outputLabel class="form-label" value="Tipo de documento"/>
                     <h:selectOneMenu class="col-12 form-select" value="#{mechanicController.mechanic.idDocumentType}">
                         <f:selectItem itemLabel="Seleccione..."/>
-                        <f:selectItems value="#{documentTypeController.documentsTypes}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
+                        <f:selectItems value="#{documentTypeController.documentTypes}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
                     </h:selectOneMenu>
 
                     <h:outputLabel class="form-label mt-2" value="Primer nombre"/>
