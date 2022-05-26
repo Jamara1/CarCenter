@@ -17,7 +17,7 @@
         <h:form>
             <div class="row">
                 <div class="col-11">
-                    <h:outputLabel class="form-label" value="Name "/>
+                    <h:outputLabel class="form-label" value="Nombre"/>
                     <h:inputText class="form-control" value="#{documentTypeController.documentType.typeName}"/>
                 </div>
                 <div class="col-1 mt-4 text-end">
@@ -29,6 +29,12 @@
             </div>
 
             <br></br>
+
+            <h:form rendered="#{documentTypeController.documentTypes.size()==0}">
+                <div class="alert alert-warning text-center">
+                    <h:outputLabel class="fw-bold" value="No hay datos"/>
+                </div>
+            </h:form>
 
             <h:dataTable class="table" value="#{documentTypeController.documentTypes}" var="document"
                          rendered="#{documentTypeController.documentTypes.size()>0}">
@@ -54,7 +60,7 @@
                         <i class="fa-solid fa-edit"></i>
                     </h:commandLink>
 
-                    <h:commandLink class="btn btn-danger me-2">
+                    <h:commandLink class="btn btn-danger me-2" action="#{documentTypeController.removeDocumentTypeEnable(document)}">
                         <i class="fa-solid fa-trash"></i>
                     </h:commandLink>
                 </h:column>

@@ -22,6 +22,12 @@
                     <i class="fa-solid fa-plus"></i>
                 </h:commandLink>
             </div>
+            
+            <h:form rendered="#{clientController.clients.size()==0}">
+                <div class="alert alert-warning text-center">
+                    <h:outputLabel class="fw-bold" value="No hay datos"/>
+                </div>
+            </h:form>
 
             <h:dataTable class="table" value="#{clientController.clients}" var="client" 
                          rendered="#{clientController.clients.size()>0}">

@@ -121,26 +121,25 @@ public class DocumentTypeController {
         }
     }
 
-    public void isDocumentTypeEnable(DocumentTypeModel documentType) throws SQLException {
+    public void removeDocumentTypeEnable(DocumentTypeModel documentType) throws SQLException {
         if (documentType == null) {
             return;
         }
 
-//        sql = "UPDATE JAMARA.TB_DOCUMENT_TYPE SET STATUS = ? WHERE ID_DOCUMENT_TYPE = ?";
-//
-//        try {
-//            conn = connectionDb.getConnection();
-//            ps = conn.prepareStatement(sql);
-//            ps.setBoolean(2, !documentType.isStatus());
-//            ps.setInt(1, documentType.getId());
-//            ps.executeUpdate();
-//
-//            this.documentType = null;
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        } finally {
-//            conn.close();
-//        }
+        sql = "DELETE FROM JAMARA.TB_DOCUMENT_TYPE WHERE ID_DOCUMENT_TYPE = ?";
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, documentType.getId());
+            ps.executeUpdate();
+
+            this.documentType = null;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
     }
     
 }

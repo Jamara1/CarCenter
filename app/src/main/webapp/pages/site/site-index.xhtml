@@ -15,16 +15,19 @@
         <hr></hr>
         
         <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel class="form-label" value="Name:"/>
-                <h:inputText class="form-control" value="#{siteController.site.name}"/>
-            </h:panelGrid>
-
-            <h:messages></h:messages>
-
+            <div class="row">
+                <div class="col-11">
+                    <h:outputLabel class="form-label" value="Nombre"/>
+                    <h:inputText class="form-control" value="#{documentTypeController.documentType.typeName}"/>
+                </div>
+                <div class="col-1 mt-4 text-end">
+                    <h:commandLink class="btn btn-dark mt-2" action="#{documentTypeController.addDocumentType()}">
+                        <i class="fa-solid fa-plus"></i>
+                    </h:commandLink>
+                </div>
+                <h:messages></h:messages>
+            </div>
             <br></br>
-
-            <h:commandButton class="btn btn-dark" value="Add" action="#{siteController.addSite()}"/>
 
             <h:dataTable value="#{siteController.listSite}" var="data">
 
