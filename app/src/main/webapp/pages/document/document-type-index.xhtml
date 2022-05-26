@@ -18,10 +18,10 @@
             <div class="row">
                 <div class="col-11">
                     <h:outputLabel class="form-label" value="Nombre"/>
-                    <h:inputText class="form-control" value="#{documentTypeController.documentType.typeName}"/>
+                    <h:inputText class="form-control" autocomplete="off" value="#{documentType.name}"/>
                 </div>
                 <div class="col-1 mt-4 text-end">
-                    <h:commandLink class="btn btn-dark mt-2" action="#{documentTypeController.addDocumentType()}">
+                    <h:commandLink class="btn btn-dark mt-2" action="#{documentTypeNav.post(documentType)}">
                         <i class="fa-solid fa-plus"></i>
                     </h:commandLink>
                 </div>
@@ -36,17 +36,17 @@
                 </div>
             </h:form>
 
-            <h:dataTable class="table" value="#{documentTypeController.documentTypes}" var="document"
+            <h:dataTable class="table animate__animated animate__fadeIn" value="#{documentTypeController.documentTypes}" var="document"
                          rendered="#{documentTypeController.documentTypes.size()>0}">
 
                 <h:column>
                     <f:facet name="header">#</f:facet>
-                    <h:outputLabel class="fw-bold" value="#{documentType.id}"/>
+                    <h:outputLabel class="fw-bold" value="#{document.index}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Nombre</f:facet>
-                    <h:outputLabel value="#{document.typeName}"/>
+                    <h:outputLabel value="#{document.name}"/>
                 </h:column>
 
                 <h:column>
@@ -56,11 +56,11 @@
 
                 <h:column class="text-center">
                     <f:facet name="header">Opciones</f:facet>
-                    <h:commandLink class="btn btn-success me-2" action="#{documentTypeController.documentType(document)}">
+                    <h:commandLink class="btn btn-success me-2" action="#{documentTypeNav.edit(document)}">
                         <i class="fa-solid fa-edit"></i>
                     </h:commandLink>
 
-                    <h:commandLink class="btn btn-danger me-2" action="#{documentTypeController.removeDocumentTypeEnable(document)}">
+                    <h:commandLink class="btn btn-danger me-2" action="#{documentTypeNav.delete(document)}">
                         <i class="fa-solid fa-trash"></i>
                     </h:commandLink>
                 </h:column>

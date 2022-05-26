@@ -4,25 +4,37 @@
  */
 package models;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author jamar
  */
-@Named(value = "DocumentTypeModel")
-@Dependent
-public class DocumentTypeModel {
+@Named(value = "documentType")
+@SessionScoped
+public class DocumentType implements Serializable {
 
     private int index;
     
     private int id;
-    private String typeName;
+    private String name;
     private Date createdAt;
     private Date updatedAt;
+    
+    public DocumentType() {
+        
+    }
 
+    public DocumentType(DocumentType documentType) {
+        this.id = documentType.getId();
+        this.name = documentType.getName();
+        this.createdAt = documentType.getCreatedAt();
+        this.updatedAt = documentType.getUpdatedAt();
+    }
+    
     public int getIndex() {
         return index;
     }
@@ -39,12 +51,12 @@ public class DocumentTypeModel {
         this.id = id;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getName() {
+        return name;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getCreatedAt() {
@@ -61,5 +73,12 @@ public class DocumentTypeModel {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    
+    public void setModelNull() {
+        this.id = 0;
+        this.name = null;
+        this.createdAt = null;
+        this.updatedAt = null;
     }
 }

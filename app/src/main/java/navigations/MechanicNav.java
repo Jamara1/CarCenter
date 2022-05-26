@@ -7,7 +7,6 @@ package navigations;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import models.ClientModel;
 
 /**
  *
@@ -15,7 +14,7 @@ import models.ClientModel;
  */
 @ManagedBean(name = "editNav")
 @SessionScoped
-public class EditNav {
+public class MechanicNav {
     
     public String showHome() {
         return "home";

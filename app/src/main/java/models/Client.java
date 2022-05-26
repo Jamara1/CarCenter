@@ -12,9 +12,9 @@ import javax.enterprise.context.Dependent;
  *
  * @author jamar
  */
-@Named(value = "ClientModel")
+@Named(value = "client")
 @Dependent
-public class ClientModel {
+public class Client {
 
     private int index;
     

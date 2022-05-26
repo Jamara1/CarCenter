@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import models.DocumentTypeModel;
+import models.DocumentType;
 
 /**
  *
@@ -22,10 +22,6 @@ import models.DocumentTypeModel;
 @RequestScoped
 public class DocumentTypeController {
 
-    /* Data */
-    private static final ArrayList<DocumentTypeModel> listDocumentsTypes = new ArrayList<>();
-    private DocumentTypeModel documentType = new DocumentTypeModel();
-
     /* SQL */
     PreparedStatement ps;
     ResultSet rs;
@@ -33,18 +29,10 @@ public class DocumentTypeController {
     Connection conn;
     String sql;
 
-    /* Getter & Setters */
-    public DocumentTypeModel getDocumentType() {
-        return this.documentType;
-    }
-
-    public void setDocumentType(DocumentTypeModel documentType) {
-        this.documentType = documentType;
-    }
-
     /* Methods */
-    public ArrayList<DocumentTypeModel> getDocumentTypes() throws SQLException {
-        listDocumentsTypes.clear();
+    public ArrayList<DocumentType> getDocumentTypes() throws SQLException {
+        ArrayList<DocumentType> listDocumentsTypes = new ArrayList<>();
+        
         sql = "SELECT * FROM TB_DOCUMENT_TYPE ORDER BY ID_DOCUMENT_TYPE ASC";
         int i = 1;
 
@@ -54,14 +42,14 @@ public class DocumentTypeController {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                DocumentTypeModel d = new DocumentTypeModel();
+                DocumentType d = new DocumentType();
                 d.setIndex(i++);
                 d.setId(rs.getInt(1));
-                d.setTypeName(rs.getString(2));
+                d.setName(rs.getString(2));
                 d.setCreatedAt(rs.getDate(3));
                 d.setUpdatedAt(rs.getDate(4));
 
-                DocumentTypeController.listDocumentsTypes.add(d);
+                listDocumentsTypes.add(d);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -69,12 +57,12 @@ public class DocumentTypeController {
             conn.close();
         }
 
-        return DocumentTypeController.listDocumentsTypes;
+        return listDocumentsTypes;
     }
 
-    public void addDocumentType() throws SQLException {
+    public void store(DocumentType documentType) throws SQLException {
 
-        if (this.documentType == null) {
+        if (documentType == null) {
             return;
         }
 
@@ -86,10 +74,10 @@ public class DocumentTypeController {
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, this.documentType.getTypeName());
+            ps.setString(1, documentType.getName());
             ps.executeUpdate();
 
-            this.documentType = null;
+            documentType.setModelNull();
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -97,9 +85,9 @@ public class DocumentTypeController {
         }
     }
 
-    public void updateDocumentType(DocumentTypeModel documentType) throws SQLException {
+    public void update(DocumentType documentType) throws SQLException {
 
-        if (this.documentType == null) {
+        if (documentType == null) {
             return;
         }
 
@@ -109,11 +97,11 @@ public class DocumentTypeController {
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(2, documentType.getTypeName());
+            ps.setString(2, documentType.getName());
             ps.setInt(1, documentType.getId());
             ps.executeUpdate();
 
-            this.documentType = null;
+            documentType.setModelNull();
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -121,8 +109,8 @@ public class DocumentTypeController {
         }
     }
 
-    public void removeDocumentTypeEnable(DocumentTypeModel documentType) throws SQLException {
-        if (documentType == null) {
+    public void destroy(DocumentType documentType) throws SQLException {
+        if (documentType.getId() == 0) {
             return;
         }
 
@@ -134,7 +122,7 @@ public class DocumentTypeController {
             ps.setInt(1, documentType.getId());
             ps.executeUpdate();
 
-            this.documentType = null;
+            documentType.setModelNull();
         } catch (SQLException e) {
             System.out.println(e);
         } finally {

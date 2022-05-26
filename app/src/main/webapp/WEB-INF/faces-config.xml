@@ -29,7 +29,7 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{listNav.showHome}</from-action>
+            <from-action>#{homeNav.index}</from-action>
             <from-outcome>home</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
@@ -39,9 +39,32 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{listNav.showDocument}</from-action>
+            <from-action>#{documentTypeNav.index}</from-action>
             <from-outcome>documents</from-outcome>
             <to-view-id>/pages/document/document-type-index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{documentTypeNav.show}</from-action>
+            <from-outcome>document-show</from-outcome>
+            <to-view-id>/pages/document/document-type-show.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{documentTypeNav.post}</from-action>
+            <from-outcome>document-post</from-outcome>
+            <to-view-id>/pages/document/document-type-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{documentTypeNav.edit}</from-action>
+            <from-outcome>document-edit</from-outcome>
+            <to-view-id>/pages/document/document-type-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{documentTypeNav.delete}</from-action>
+            <from-outcome>document-delete</from-outcome>
+            <to-view-id>/pages/document/document-type-index.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
         
@@ -49,13 +72,13 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{listNav.showClient}</from-action>
+            <from-action>#{clientNav.index}</from-action>
             <from-outcome>clients</from-outcome>
             <to-view-id>/pages/client/client-index.xhtml</to-view-id>
         </navigation-case>
         
         <navigation-case>
-            <from-action>#{createNav.showClientCreate}</from-action>
+            <from-action>#{clientNav.create}</from-action>
             <from-outcome>client-create</from-outcome>
             <to-view-id>/pages/client/client-create.xhtml</to-view-id>
         </navigation-case>

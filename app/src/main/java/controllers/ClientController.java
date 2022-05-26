@@ -10,11 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import models.ClientModel;
+import models.Client;
 
 /**
  *
@@ -24,10 +22,6 @@ import models.ClientModel;
 @RequestScoped
 public class ClientController {
 
-    /* Data */
-    private static final ArrayList<ClientModel> listClient = new ArrayList<>();
-    private ClientModel client = new ClientModel();
-
     /* SQL */
     PreparedStatement ps;
     ResultSet rs;
@@ -35,18 +29,10 @@ public class ClientController {
     Connection conn;
     String sql;
 
-    /* Getter & Setters */
-    public ClientModel getClient() {
-        return this.client;
-    }
-
-    public void setClient(ClientModel client) {
-        this.client = client;
-    }
-
     /* Methods */
-    public ArrayList<ClientModel> getClients() throws SQLException {
-        listClient.clear();
+    public ArrayList<Client> getClients() throws SQLException {
+        ArrayList<Client> listClient = new ArrayList<>();
+        
         sql = "SELECT * FROM TB_CLIENT ORDER BY ID_CLIENT ASC";
         int i = 1;
 
@@ -56,7 +42,7 @@ public class ClientController {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                ClientModel c = new ClientModel();
+                Client c = new Client();
                 c.setIndex(i++);
                 c.setId(rs.getInt(1));
                 c.setFirstName(rs.getString(2));
@@ -78,7 +64,7 @@ public class ClientController {
                 c.setCreatedAt(rs.getDate(12));
                 c.setUpdatedAt(rs.getDate(13));
 
-                ClientController.listClient.add(c);
+                listClient.add(c);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -86,12 +72,12 @@ public class ClientController {
             conn.close();
         }
 
-        return ClientController.listClient;
+        return listClient;
     }
 
-    public void addClient() throws SQLException {
+    public void store(Client client) throws SQLException {
 
-        if (this.client == null) {
+        if (client == null) {
             return;
         }
 
@@ -103,18 +89,18 @@ public class ClientController {
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, this.client.getFirstName());
-            ps.setString(2, this.client.getLastName());
-            ps.setString(3, this.client.getFirstSurname());
-            ps.setString(4, this.client.getSecondSurname());
-            ps.setInt(5, this.client.getIdDocumentType());
-            ps.setString(6, this.client.getDocumentNumber());
-            ps.setString(7, this.client.getCellphone());
-            ps.setString(8, this.client.getAddress());
-            ps.setString(9, this.client.getEmail());
+            ps.setString(1, client.getFirstName());
+            ps.setString(2, client.getLastName());
+            ps.setString(3, client.getFirstSurname());
+            ps.setString(4, client.getSecondSurname());
+            ps.setInt(5, client.getIdDocumentType());
+            ps.setString(6, client.getDocumentNumber());
+            ps.setString(7, client.getCellphone());
+            ps.setString(8, client.getAddress());
+            ps.setString(9, client.getEmail());
             ps.executeUpdate();
 
-            this.client = null;
+            client = null;
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -122,9 +108,9 @@ public class ClientController {
         }
     }
 
-    public void updateClient(ClientModel client) throws SQLException {
+    public void update(Client client) throws SQLException {
 
-        if (this.client == null) {
+        if (client == null) {
             return;
         }
 
@@ -150,7 +136,7 @@ public class ClientController {
             ps.setInt(1, client.getId());
             ps.executeUpdate();
 
-            this.client = null;
+            client = null;
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -158,7 +144,7 @@ public class ClientController {
         }
     }
 
-    public void isClientEnable(ClientModel client) throws SQLException {
+    public void isEnable(Client client) throws SQLException {
         if (client == null) {
             return;
         }
@@ -172,7 +158,7 @@ public class ClientController {
             ps.setInt(1, client.getId());
             ps.executeUpdate();
 
-            this.client = null;
+            client = null;
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
