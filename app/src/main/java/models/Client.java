@@ -5,15 +5,15 @@
 package models;
 
 import java.sql.Date;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 
 /**
  *
  * @author jamar
  */
 @Named(value = "client")
-@Dependent
+@ApplicationScoped
 public class Client {
 
     private int index;

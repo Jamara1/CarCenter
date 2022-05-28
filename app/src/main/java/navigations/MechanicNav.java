@@ -5,42 +5,54 @@
  */
 package navigations;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import controllers.MechanicController;
+import java.sql.SQLException;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+import models.Mechanic;
 
 /**
  *
  * @author jamar
  */
-@ManagedBean(name = "editNav")
-@SessionScoped
+@Named("mechanicNav")
+@ApplicationScoped
 public class MechanicNav {
-    
-    public String showHome() {
-        return "home";
+
+    MechanicController controller = new MechanicController();
+
+    public String index() {
+        return "mechanics";
     }
 
-    public String showDocumentEdit() {
-        return "document-edit";
+    public String show() {
+        return "mechanic-show";
     }
 
-    public String showClientEdit() {
-        return "client-edit";
+    public String create() {
+        return "mechanic-create";
     }
 
-    public String showMechanicEdit() {
+    public String post(Mechanic mechanic) throws SQLException {
+        controller.store(mechanic);
+        return "mechanic-index.xhtml?faces-redirect=true";
+    }
+
+    public String edit(int id) throws SQLException {
+        controller.getMechanic(id);
+        
         return "mechanic-edit";
     }
     
-    public String showCarEdit() {
-        return "car-edit";
+    public String put(Mechanic mechanic) throws SQLException {
+        controller.update(mechanic);
+
+        return "mechanic-index.xhtml?faces-redirect=true";
     }
-    
-    public String showSiteEdit() {
-        return "site-edit";
-    }
-    
-    public String showReplacementEdit() {
-        return "replacement-edi";
+
+    public String setStatus(Mechanic mechanic) throws SQLException {
+        controller.isEnable(mechanic);
+
+        return "mechanic-index.xhtml?faces-redirect=true";
     }
 }

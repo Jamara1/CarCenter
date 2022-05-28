@@ -76,39 +76,70 @@
             <from-outcome>clients</from-outcome>
             <to-view-id>/pages/client/client-index.xhtml</to-view-id>
         </navigation-case>
-        
+        <navigation-case>
+            <from-action>#{clientNav.show}</from-action>
+            <from-outcome>client-show</from-outcome>
+            <to-view-id>/pages/client/client-show.xhtml</to-view-id>
+        </navigation-case>
         <navigation-case>
             <from-action>#{clientNav.create}</from-action>
             <from-outcome>client-create</from-outcome>
             <to-view-id>/pages/client/client-create.xhtml</to-view-id>
         </navigation-case>
-        
         <navigation-case>
-            <from-action>#{editNav.showClientEdit}</from-action>
+            <from-action>#{clientNav.post}</from-action>
+            <from-outcome>client-post</from-outcome>
+            <to-view-id>/pages/client/client-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{clientNav.edit}</from-action>
             <from-outcome>client-edit</from-outcome>
             <to-view-id>/pages/client/client-edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{clientNav.put}</from-action>
+            <from-outcome>client-put</from-outcome>
+            <to-view-id>/pages/client/client-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{clientNav.delete}</from-action>
+            <from-outcome>client-delete</from-outcome>
+            <to-view-id>/pages/client/client-index.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
         
     <!-- Mechanics -->
     <navigation-rule>
         <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-action>#{listNav.showMechanic}</from-action>
+            <navigation-case>
+            <from-action>#{mechanicNav.index}</from-action>
             <from-outcome>mechanics</from-outcome>
             <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
         </navigation-case>
-        
         <navigation-case>
-            <from-action>#{createNav.showMechanicCreate}</from-action>
-            <from-outcome>mechanic-create</from-outcome>
-            <to-view-id>/pages/mechanic/mechanic-create.xhtml</to-view-id>
+            <from-action>#{mechanicNav.show}</from-action>
+            <from-outcome>mechanic-show</from-outcome>
+            <to-view-id>/pages/mechanic/mechanic-show.xhtml</to-view-id>
         </navigation-case>
-        
         <navigation-case>
-            <from-action>#{editNav.showMechanicEdit}</from-action>
+            <from-action>#{mechanicNav.post}</from-action>
+            <from-outcome>mechanic-post</from-outcome>
+            <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{mechanicNav.edit}</from-action>
             <from-outcome>mechanic-edit</from-outcome>
             <to-view-id>/pages/mechanic/mechanic-edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{mechanicNav.delete}</from-action>
+            <from-outcome>mechanic-delete</from-outcome>
+            <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 
@@ -126,9 +157,32 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{listNav.showSite}</from-action>
+            <from-action>#{siteNav.index}</from-action>
             <from-outcome>sites</from-outcome>
             <to-view-id>/pages/site/site-index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{siteNav.show}</from-action>
+            <from-outcome>site-show</from-outcome>
+            <to-view-id>/pages/site/site-show.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{siteNav.post}</from-action>
+            <from-outcome>site-post</from-outcome>
+            <to-view-id>/pages/site/site-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{siteNav.edit}</from-action>
+            <from-outcome>site-edit</from-outcome>
+            <to-view-id>/pages/site/site-index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{siteNav.delete}</from-action>
+            <from-outcome>site-delete</from-outcome>
+            <to-view-id>/pages/site/site-index.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
         

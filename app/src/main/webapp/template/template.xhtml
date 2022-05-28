@@ -12,7 +12,7 @@
 
         <!-- Animate styles -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-        
+
         <!-- icons Script -->
         <script src="https://kit.fontawesome.com/a415589fc2.js" crossorigin="anonymous"></script>
     </h:head>
@@ -39,7 +39,7 @@
                                         <h:commandLink class="dropdown-item" value="Clientes" action="#{clientNav.index}"></h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink class="dropdown-item" value="Mecanicos" action="#{listNav.showMechanic}"></h:commandLink>
+                                        <h:commandLink class="dropdown-item" value="Mecanicos" action="#{mechanicNav.index}"></h:commandLink>
                                     </li>
                                     <li><hr class="dropdown-divider"></hr></li>
                                     <li>
@@ -54,7 +54,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <h:commandLink class="dropdown-item" value="Sedes" action="#{listNav.showSite}"></h:commandLink>
+                                        <h:commandLink class="dropdown-item" value="Sedes" action="#{siteNav.index}"></h:commandLink>
                                     </li>
                                     <li>
                                         <h:commandLink class="dropdown-item" value="Repuestos" action="#{listNav.showReplacement}"></h:commandLink>
@@ -79,7 +79,7 @@
         <div class="container my-4">
             <ui:insert name="body"/>
         </div>
-        
+
     </h:body>
 </html>
 

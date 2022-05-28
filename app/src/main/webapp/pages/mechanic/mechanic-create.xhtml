@@ -18,7 +18,7 @@
             </div>
             <div class="col-6 mt-1 text-end">
             <h:form>
-                <h:commandLink class="btn btn-danger" value="Regresar" action="#{listNav.showMechanic}"/>
+                <h:commandLink class="btn btn-danger" value="Regresar" action="#{mechanicNav.index}"/>
             </h:form>
             </div>
         </div>
@@ -28,44 +28,44 @@
             <div class="row my-4">
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Tipo de documento"/>
-                    <h:selectOneMenu class="col-12 form-select" value="#{mechanicController.mechanic.idDocumentType}">
+                    <h:selectOneMenu class="col-12 form-select" value="#{mechanic.idDocumentType}">
                         <f:selectItem itemLabel="Seleccione..."/>
-                        <f:selectItems value="#{documentTypeController.documentTypes}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
+                        <f:selectItems value="#{documentTypeController.documentTypes}" var="data" itemValue="#{data.id}" itemLabel="#{data.name}"/>
                     </h:selectOneMenu>
 
                     <h:outputLabel class="form-label mt-2" value="Primer nombre"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.firstName}" required="true">
+                    <h:inputText class="form-control" value="#{mechanic.firstName}" required="true">
                         <f:validateLength minimum="3"/>
                     </h:inputText>
 
                     <h:outputLabel class="form-label mt-2" value="Primer apellido"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.firstSurname}" required="true">
+                    <h:inputText class="form-control" value="#{mechanic.firstSurname}" required="true">
                         <f:validateLength minimum="3"/>
                     </h:inputText>
 
                     <h:outputLabel class="form-label mt-2" value="Celular"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.cellphone}"/>
+                    <h:inputText class="form-control" value="#{mechanic.cellphone}"/>
 
                     <h:outputLabel class="form-label mt-2" value="E-mail"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.email}" required="true"/>
+                    <h:inputText class="form-control" value="#{mechanic.email}" required="true"/>
                 </div>
 
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Numero de documento"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.documentNumber}" required="true"/>
+                    <h:inputText class="form-control" value="#{mechanic.documentNumber}" required="true"/>
 
                     <h:outputLabel class="form-label mt-2" value="Segundo nombre"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.lastName}"/>
+                    <h:inputText class="form-control" value="#{mechanic.lastName}"/>
 
                     <h:outputLabel class="form-label mt-2" value="Segundo apellido"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.secondSurname}"/>
+                    <h:inputText class="form-control" value="#{mechanic.secondSurname}"/>
 
                     <h:outputLabel class="form-label mt-2" value="Dirección"/>
-                    <h:inputText class="form-control" value="#{mechanicController.mechanic.address}"/>
+                    <h:inputText class="form-control" value="#{mechanic.address}"/>
                 </div>
 
                 <div class="col-12 mt-4">
-                    <h:commandButton class="w-100 btn btn-dark mt-2" value="Agregar" action="#{mechanicController.addMechanic()}">
+                    <h:commandButton class="w-100 btn btn-dark mt-2" value="Agregar" action="#{mechanicNav.post(mechanic)}">
                         <i class="fa-solid fa-paper-plane-top"></i>
                     </h:commandButton>
                 </div>

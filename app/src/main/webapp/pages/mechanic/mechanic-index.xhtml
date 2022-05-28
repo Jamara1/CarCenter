@@ -17,7 +17,7 @@
 
         <h:form>
             <div class="w-100 text-end mb-2">
-                <h:commandLink class="btn btn-dark" action="#{createNav.showMechanicCreate()}">
+                <h:commandLink class="btn btn-dark" action="#{mechanicNav.create}">
                     <i class="fa-solid fa-plus"></i>
                 </h:commandLink>
             </div>
@@ -28,51 +28,51 @@
                 </div>
             </h:form>
 
-            <h:dataTable class="table" value="#{mechanicController.mechanics}" var="mechanic" 
+            <h:dataTable class="table" value="#{mechanicController.mechanics}" var="data" 
                          rendered="#{mechanicController.mechanics.size()>0}">
                 <h:column>
                     <f:facet name="header">#</f:facet>
-                    <h:outputText class="fw-bold" value="#{mechanic.index}"></h:outputText>
+                    <h:outputText class="fw-bold" value="#{data.index}"></h:outputText>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Documento</f:facet>
-                    <h:outputLabel value="#{mechanic.documentNumber}"/>
+                    <h:outputLabel value="#{data.documentNumber}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Nombre</f:facet>
-                    <h:outputLabel value="#{mechanic.fullName}"/>
+                    <h:outputLabel value="#{data.fullName}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Celular</f:facet>
-                    <h:outputLabel value="#{mechanic.cellphone}"/>
+                    <h:outputLabel value="#{data.cellphone}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">E-mail</f:facet>
-                    <h:outputLabel value="#{mechanic.email}"/>
+                    <h:outputLabel value="#{data.email}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Fecha creación</f:facet>
-                    <h:outputLabel value="#{mechanic.createdAt}"/>
+                    <h:outputLabel value="#{data.createdAt}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Opciones</f:facet>
 
-                    <h:commandLink class="btn btn-success me-2" action="#{editNav.showMechanicEdit()}">
-                        <f:param name="id" value="#{mechanic.id}"></f:param>
+                    <h:commandLink class="btn btn-success me-2" action="#{mechanicNav.edit(data.id)}">
+                        <f:param name="id" value="#{data.id}"></f:param>
                         <i class="fa-solid fa-edit"></i>
                     </h:commandLink>
                     
-                    <h:commandLink class="btn btn-primary me-2" rendered="#{mechanic.status}" action="#{mechanicController.isMechanicEnable(mechanic)}">
+                    <h:commandLink class="btn btn-primary me-2" rendered="#{data.status}" action="#{mechanicController.isEnable(data)}">
                         <i class="fa-solid fa-unlock"></i>
                     </h:commandLink>
                     
-                    <h:commandLink class="btn btn-danger me-2" rendered="#{!mechanic.status}" action="#{mechanicController.isMechanicEnable(mechanic)}">
+                    <h:commandLink class="btn btn-danger me-2" rendered="#{!data.status}" action="#{mechanicController.isEnable(data)}">
                         <i class="fa-solid fa-lock"></i>
                     </h:commandLink>
                 </h:column>

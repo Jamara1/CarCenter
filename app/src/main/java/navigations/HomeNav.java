@@ -7,7 +7,7 @@ package navigations;
 
 
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 /**
@@ -15,7 +15,7 @@ import javax.inject.Named;
  * @author jamar
  */
 @Named("homeNav")
-@SessionScoped
+@ApplicationScoped
 public class HomeNav implements Serializable {
     
     public String index() {

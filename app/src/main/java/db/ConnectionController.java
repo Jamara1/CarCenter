@@ -8,6 +8,8 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -33,6 +35,11 @@ public class ConnectionController {
         }
         
         return conn;
+    }
+    
+    public void saveData(String key, Object obj) {
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        sessionMap.put(key, obj);
     }
     
 }

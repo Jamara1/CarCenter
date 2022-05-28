@@ -6,12 +6,16 @@
 package models;
 
 import java.sql.Date;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author jamar
  */
-public class MechanicModel {
+@Named(value = "mechanic")
+@ApplicationScoped
+public class Mechanic {
     
     private int index;
     

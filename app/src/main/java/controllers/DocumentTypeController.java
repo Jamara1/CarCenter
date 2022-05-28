@@ -85,20 +85,40 @@ public class DocumentTypeController {
         }
     }
 
-    public void update(DocumentType documentType) throws SQLException {
-
-        if (documentType == null) {
-            return;
-        }
-
-        sql = "UPDATE JAMARA.TB_DOCUMENT_TYPE SET TYPE_NAME = ?,"
-                + " UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_DOCUMENT_TYPE = ?";
+    public void getDocumentType(int id) throws SQLException {
+        DocumentType d = null;
+        sql = "SELECT * FROM JAMARA.TB_DOCUMENT_TYPE WHERE ID_DOCUMENT_TYPE = " + id;
 
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(2, documentType.getName());
-            ps.setInt(1, documentType.getId());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                d = new DocumentType();
+                d.setId(rs.getInt(1));
+                d.setName(rs.getString(2));
+                d.setCreatedAt(rs.getDate(3));
+                d.setUpdatedAt(rs.getDate(4));
+            }
+
+            connectionDb.saveData("editDocument", d);
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
+    }
+
+    public void update(DocumentType documentType) throws SQLException {
+        sql = "UPDATE JAMARA.TB_DOCUMENT_TYPE SET NAME = ?, "
+                + "UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_DOCUMENT_TYPE = ?";
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, documentType.getName());
+            ps.setInt(2, documentType.getId());
             ps.executeUpdate();
 
             documentType.setModelNull();

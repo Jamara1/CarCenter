@@ -4,18 +4,17 @@
  */
 package models;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author jamar
  */
 @Named(value = "documentType")
-@SessionScoped
-public class DocumentType implements Serializable {
+@ApplicationScoped
+public class DocumentType {
 
     private int index;
     

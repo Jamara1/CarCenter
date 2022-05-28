@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import models.MechanicModel;
+import models.Mechanic;
 
 /**
  *
@@ -23,10 +23,6 @@ import models.MechanicModel;
 @RequestScoped
 public class MechanicController {
           
-    /* Data */
-    private static final ArrayList<MechanicModel> listMechanic = new ArrayList<>();
-    private MechanicModel mechanic = new MechanicModel();
-
     /* SQL */
     PreparedStatement ps;
     ResultSet rs;
@@ -34,19 +30,11 @@ public class MechanicController {
     Connection conn;
     String sql;
 
-    /* Getter & Setters */
-    public MechanicModel getMechanic() {
-        return this.mechanic;
-    }
-
-    public void setMechanic(MechanicModel mechanic) {
-        this.mechanic = mechanic;
-    }
-
     /* Methods */
-    public ArrayList<MechanicModel> getMechanics() throws SQLException {
-        listMechanic.clear();
-        sql = "SELECT * FROM TB_MECHANIC ORDER BY ID_MECHANIC ASC";
+    public ArrayList<Mechanic> getMechanics() throws SQLException {
+        ArrayList<Mechanic> listMechanic = new ArrayList<>();
+        
+        sql = "SELECT * FROM JAMARA.TB_MECHANIC ORDER BY ID_MECHANIC ASC";
         int i = 1;
 
         try {
@@ -55,7 +43,7 @@ public class MechanicController {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                MechanicModel m = new MechanicModel();
+                Mechanic m = new Mechanic();
                 m.setIndex(i++);
                 m.setId(rs.getInt(1));
                 m.setFirstName(rs.getString(2));
@@ -77,7 +65,7 @@ public class MechanicController {
                 m.setCreatedAt(rs.getDate(12));
                 m.setUpdatedAt(rs.getDate(13));
 
-                MechanicController.listMechanic.add(m);
+                listMechanic.add(m);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -85,15 +73,10 @@ public class MechanicController {
             conn.close();
         }
 
-        return MechanicController.listMechanic;
+        return listMechanic;
     }
 
-    public void addMechanic() throws SQLException {
-
-        if (this.mechanic == null) {
-            return;
-        }
-
+    public void store(Mechanic mechanic) throws SQLException {
         sql = "INSERT INTO JAMARA.TB_MECHANIC "
                 + "(FIRST_NAME, LAST_NAME, FIRST_SURNAME, SECOND_SURNAME, ID_DOCUMENT_TYPE, DOCUMENT_NUMBER, CELLPHONE, ADDRESS, EMAIL)"
                 + " VALUES"
@@ -102,18 +85,17 @@ public class MechanicController {
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, this.mechanic.getFirstName());
-            ps.setString(2, this.mechanic.getLastName());
-            ps.setString(3, this.mechanic.getFirstSurname());
-            ps.setString(4, this.mechanic.getSecondSurname());
-            ps.setInt(5, this.mechanic.getIdDocumentType());
-            ps.setString(6, this.mechanic.getDocumentNumber());
-            ps.setString(7, this.mechanic.getCellphone());
-            ps.setString(8, this.mechanic.getAddress());
-            ps.setString(9, this.mechanic.getEmail());
+            ps.setString(1, mechanic.getFirstName());
+            ps.setString(2, mechanic.getLastName());
+            ps.setString(3, mechanic.getFirstSurname());
+            ps.setString(4, mechanic.getSecondSurname());
+            ps.setInt(5, mechanic.getIdDocumentType());
+            ps.setString(6, mechanic.getDocumentNumber());
+            ps.setString(7, mechanic.getCellphone());
+            ps.setString(8, mechanic.getAddress());
+            ps.setString(9, mechanic.getEmail());
             ps.executeUpdate();
 
-            this.mechanic = null;
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -121,14 +103,41 @@ public class MechanicController {
         }
     }
 
-    public void updateMechanic(MechanicModel mechanic) throws SQLException {
+    public void getMechanic(int id) throws SQLException {
+        Mechanic m = null;
+        sql = "SELECT * FROM JAMARA.TB_MECHANIC WHERE ID_MECHANIC = " + id;
 
-        if (this.mechanic == null) {
-            return;
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                m = new Mechanic();
+                m.setId(rs.getInt(1));
+                m.setFirstName(rs.getString(2));
+                m.setLastName(rs.getString(3));
+                m.setFirstSurname(rs.getString(4));
+                m.setSecondSurname(rs.getString(5));
+                m.setIdDocumentType(rs.getInt(6));
+                m.setDocumentNumber(rs.getString(7));
+                m.setCellphone(rs.getString(8));
+                m.setAddress(rs.getString(9));
+                m.setEmail(rs.getString(10));
+                m.setStatus(rs.getBoolean(11));
+                m.setCreatedAt(rs.getDate(12));
+                m.setUpdatedAt(rs.getDate(13));
+            }
+
+            connectionDb.saveData("editMechanic", m);
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
         }
+    }
 
-        System.out.println(mechanic.getFullName());
-
+    public void update(Mechanic mechanic) throws SQLException {
         sql = "UPDATE JAMARA.TB_MECHANIC SET FIRST_NAME = ?, LAST_NAME = ?, "
                 + "FIRST_SURNAME = ?, SECOND_SURNAME = ?, ID_DOCUMENT_TYPE = ?, "
                 + "DOCUMENT_NUMBER = ?, CELLPHONE = ?, ADDRESS = ?, "
@@ -137,19 +146,18 @@ public class MechanicController {
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(2, mechanic.getFirstName());
-            ps.setString(3, mechanic.getLastName());
-            ps.setString(4, mechanic.getFirstSurname());
-            ps.setString(5, mechanic.getSecondSurname());
-            ps.setInt(6, mechanic.getIdDocumentType());
-            ps.setString(7, mechanic.getDocumentNumber());
-            ps.setString(8, mechanic.getCellphone());
-            ps.setString(9, mechanic.getAddress());
-            ps.setString(10, mechanic.getEmail());
-            ps.setInt(1, mechanic.getId());
+            ps.setString(1, mechanic.getFirstName());
+            ps.setString(2, mechanic.getLastName());
+            ps.setString(3, mechanic.getFirstSurname());
+            ps.setString(4, mechanic.getSecondSurname());
+            ps.setInt(5, mechanic.getIdDocumentType());
+            ps.setString(6, mechanic.getDocumentNumber());
+            ps.setString(7, mechanic.getCellphone());
+            ps.setString(8, mechanic.getAddress());
+            ps.setString(9, mechanic.getEmail());
+            ps.setInt(10, mechanic.getId());
             ps.executeUpdate();
 
-            this.mechanic = null;
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -157,26 +165,20 @@ public class MechanicController {
         }
     }
 
-    public void isMechanicEnable(MechanicModel mechanic) throws SQLException {
-        if (mechanic == null) {
-            return;
-        }
-
+    public void isEnable(Mechanic mechanic) throws SQLException {
         sql = "UPDATE JAMARA.TB_MECHANIC SET STATUS = ? WHERE ID_MECHANIC = ?";
 
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setBoolean(2, !mechanic.isStatus());
-            ps.setInt(1, mechanic.getId());
+            ps.setBoolean(1, !mechanic.isStatus());
+            ps.setInt(2, mechanic.getId());
             ps.executeUpdate();
 
-            this.mechanic = null;
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
             conn.close();
         }
     }
-    
 }

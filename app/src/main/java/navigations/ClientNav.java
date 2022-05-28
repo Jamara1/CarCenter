@@ -7,9 +7,8 @@ package navigations;
 
 import controllers.ClientController;
 
-import java.io.Serializable;
 import java.sql.SQLException;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import models.Client;
 
@@ -18,8 +17,8 @@ import models.Client;
  * @author jamar
  */
 @Named("clientNav")
-@SessionScoped
-public class ClientNav implements Serializable {
+@ApplicationScoped
+public class ClientNav {
     
     ClientController controller = new ClientController();
     
@@ -37,19 +36,20 @@ public class ClientNav implements Serializable {
 
     public String post(Client client) throws SQLException {
         controller.store(client);
+        
         return "client-index.xhtml?faces-redirect=true";
     }
     
-    public String edit(Client client) {
-        client.setFirstName(client.getFirstName());
+    public String edit(int id) throws SQLException {
+        controller.getClient(id);
         
-        return "client-index.xhtml?faces-redirect=true";
+        return "client-edit";
     }
     
     public String put(Client client) throws SQLException {
         controller.update(client);
         
-        return "client-put";
+        return "client-index.xhtml?faces-redirect=true";
     }
     
     public String setStatus(Client client) throws SQLException {

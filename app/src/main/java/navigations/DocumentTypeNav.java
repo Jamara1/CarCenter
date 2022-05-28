@@ -6,9 +6,8 @@
 package navigations;
 
 import controllers.DocumentTypeController;
-import java.io.Serializable;
 import java.sql.SQLException;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import models.DocumentType;
 
@@ -17,8 +16,8 @@ import models.DocumentType;
  * @author jamar
  */
 @Named("documentTypeNav")
-@SessionScoped
-public class DocumentTypeNav implements Serializable {
+@ApplicationScoped
+public class DocumentTypeNav {
     
     DocumentTypeController controller = new DocumentTypeController();
     
@@ -39,8 +38,8 @@ public class DocumentTypeNav implements Serializable {
         return "document-type-index.xhtml?faces-redirect=true";
     }
     
-    public String edit(DocumentType documentType) {
-        documentType.setName(documentType.getName());
+    public String edit(int id) throws SQLException {
+        controller.getDocumentType(id);
         
         return "document-type-index.xhtml?faces-redirect=true";
     }

@@ -18,7 +18,7 @@
             </div>
             <div class="col-6 mt-1 text-end">
             <h:form>
-                <h:commandLink class="btn btn-danger" value="Regresar" action="#{listNav.showClient}"/>
+                <h:commandLink class="btn btn-danger" value="Regresar" action="#{clientNav.index}"/>
             </h:form>
             </div>
         </div>
@@ -28,44 +28,44 @@
             <div class="row my-4">
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Tipo de documento"/>
-                    <h:selectOneMenu class="col-12 form-select" value="#{clientController.client.idDocumentType}">
+                    <h:selectOneMenu class="col-12 form-select" value="#{client.idDocumentType}">
                         <f:selectItem itemLabel="Seleccione..."/>
-                        <f:selectItems value="#{documentTypeController.documentTypes}" var="data" itemValue="#{data.id}" itemLabel="#{data.typeName}"/>
+                        <f:selectItems value="#{documentTypeController.documentTypes}" var="data" itemValue="#{data.id}" itemLabel="#{data.name}"/>
                     </h:selectOneMenu>
 
                     <h:outputLabel class="form-label mt-2" value="Primer nombre"/>
-                    <h:inputText class="form-control" value="#{clientController.client.firstName}" required="true">
+                    <h:inputText class="form-control" value="#{client.firstName}" required="true">
                         <f:validateLength minimum="3"/>
                     </h:inputText>
 
                     <h:outputLabel class="form-label mt-2" value="Primer apellido"/>
-                    <h:inputText class="form-control" value="#{clientController.client.firstSurname}" required="true">
+                    <h:inputText class="form-control" value="#{client.firstSurname}" required="true">
                         <f:validateLength minimum="3"/>
                     </h:inputText>
 
                     <h:outputLabel class="form-label mt-2" value="Celular"/>
-                    <h:inputText class="form-control" value="#{clientController.client.cellphone}"/>
+                    <h:inputText class="form-control" value="#{client.cellphone}"/>
 
                     <h:outputLabel class="form-label mt-2" value="E-mail"/>
-                    <h:inputText class="form-control" value="#{clientController.client.email}" required="true"/>
+                    <h:inputText class="form-control" value="#{client.email}" required="true"/>
                 </div>
 
                 <div class="col-6">
                     <h:outputLabel class="form-label" value="Numero de documento"/>
-                    <h:inputText class="form-control" value="#{clientController.client.documentNumber}" required="true"/>
+                    <h:inputText class="form-control" value="#{client.documentNumber}" required="true"/>
 
                     <h:outputLabel class="form-label mt-2" value="Segundo nombre"/>
-                    <h:inputText class="form-control" value="#{clientController.client.lastName}"/>
+                    <h:inputText class="form-control" value="#{client.lastName}"/>
 
                     <h:outputLabel class="form-label mt-2" value="Segundo apellido"/>
-                    <h:inputText class="form-control" value="#{clientController.client.secondSurname}"/>
+                    <h:inputText class="form-control" value="#{client.secondSurname}"/>
 
                     <h:outputLabel class="form-label mt-2" value="Dirección"/>
-                    <h:inputText class="form-control" value="#{clientController.client.address}"/>
+                    <h:inputText class="form-control" value="#{client.address}"/>
                 </div>
 
                 <div class="col-12 mt-4">
-                    <h:commandButton class="w-100 btn btn-dark mt-2" value="Agregar" action="#{clientController.addClient()}">
+                    <h:commandButton class="w-100 btn btn-dark mt-2" value="Agregar" action="#{clientNav.post(client)}">
                         <i class="fa-solid fa-paper-plane-top"></i>
                     </h:commandButton>
                 </div>
