@@ -50,7 +50,7 @@ public class MechanicNav {
         return "mechanic-index.xhtml?faces-redirect=true";
     }
 
-    public String setStatus(Mechanic mechanic) throws SQLException {
+    public String delete(Mechanic mechanic) throws SQLException {
         controller.isEnable(mechanic);
 
         return "mechanic-index.xhtml?faces-redirect=true";

@@ -31,7 +31,7 @@ public class DocumentTypeController {
 
     /* Methods */
     public ArrayList<DocumentType> getDocumentTypes() throws SQLException {
-        ArrayList<DocumentType> listDocumentsTypes = new ArrayList<>();
+        ArrayList<DocumentType> listDocumentsType = new ArrayList<>();
         
         sql = "SELECT * FROM TB_DOCUMENT_TYPE ORDER BY ID_DOCUMENT_TYPE ASC";
         int i = 1;
@@ -49,7 +49,7 @@ public class DocumentTypeController {
                 d.setCreatedAt(rs.getDate(3));
                 d.setUpdatedAt(rs.getDate(4));
 
-                listDocumentsTypes.add(d);
+                listDocumentsType.add(d);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -57,7 +57,7 @@ public class DocumentTypeController {
             conn.close();
         }
 
-        return listDocumentsTypes;
+        return listDocumentsType;
     }
 
     public void store(DocumentType documentType) throws SQLException {

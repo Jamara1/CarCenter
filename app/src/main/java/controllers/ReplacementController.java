@@ -5,39 +5,150 @@
  */
 package controllers;
 
-import models.ReplacementModel;
+import db.ConnectionController;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import models.Replacement;
 
 /**
  *
  * @author jamar
  */
+@Named(value = "replacementController")
+@RequestScoped
 public class ReplacementController {
-    private static List<ReplacementModel> listReplacement = new ArrayList<ReplacementModel>();
-    private ReplacementModel replacement = new ReplacementModel();
+/* SQL */
+    PreparedStatement ps;
+    ResultSet rs;
+    ConnectionController connectionDb = new ConnectionController();
+    Connection conn;
+    String sql;
 
-    public List<ReplacementModel> getListReplacement() {
+    /* Methods */
+    public ArrayList<Replacement> getReplacements() throws SQLException {
+        ArrayList<Replacement> listReplacement = new ArrayList<>();
+        
+        sql = "SELECT * FROM TB_REPLACEMENT ORDER BY ID_REPLACEMENT ASC";
+        int i = 1;
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Replacement r = new Replacement();
+                r.setIndex(i++);
+                r.setId(rs.getInt(1));
+                r.setName(rs.getString(2));
+                r.setPrice(rs.getInt(3));
+                r.setQuantity(rs.getInt(4));
+                r.setStatus(rs.getBoolean(5));
+                r.setCreatedAt(rs.getDate(6));
+                r.setUpdatedAt(rs.getDate(7));
+
+                listReplacement.add(r);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
+
         return listReplacement;
     }
 
-    public void setListReplacement(List<ReplacementModel> listReplacement) {
-        ReplacementController.listReplacement = listReplacement;
+    public void store(Replacement replacement) throws SQLException {
+
+        if (replacement == null) {
+            return;
+        }
+
+        sql = "INSERT INTO JAMARA.TB_REPLACEMENT "
+                + "(NAME, PRICE, QUANTITY)"
+                + " VALUES"
+                + "(?, ?, ?)";
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, replacement.getName());
+            ps.setInt(2, replacement.getPrice());
+            ps.setInt(3, replacement.getQuantity());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
     }
 
-    public ReplacementModel getReplacement() {
-        return replacement;
+    public void getReplacement(int id) throws SQLException {
+        Replacement d = null;
+        sql = "SELECT * FROM JAMARA.TB_REPLACEMENT WHERE ID_REPLACEMENT = " + id;
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                d = new Replacement();
+                d.setId(rs.getInt(1));
+                d.setName(rs.getString(2));
+                d.setCreatedAt(rs.getDate(3));
+                d.setUpdatedAt(rs.getDate(4));
+            }
+
+            connectionDb.saveData("editDocument", d);
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
     }
 
-    public void setReplacement(ReplacementModel replacement) {
-        this.replacement = replacement;
+    public void update(Replacement replacement) throws SQLException {
+        sql = "UPDATE JAMARA.TB_REPLACEMENT SET NAME = ?, "
+                + "UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_REPLACEMENT = ?";
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, replacement.getName());
+            ps.setInt(2, replacement.getId());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
     }
-    
-    public void addReplacement() {
-       ReplacementController.listReplacement.add(this.replacement);
-    }
-    
-    public void isReplacement(ReplacementModel replacement) {
-        ReplacementController.listReplacement.remove(replacement);
+
+    public void destroy(Replacement replacement) throws SQLException {
+        if (replacement.getId() == 0) {
+            return;
+        }
+
+        sql = "DELETE FROM JAMARA.TB_REPLACEMENT WHERE ID_REPLACEMENT = ?";
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, replacement.getId());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
     }
 }

@@ -87,34 +87,16 @@
             <to-view-id>/pages/client/client-create.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-action>#{clientNav.post}</from-action>
-            <from-outcome>client-post</from-outcome>
-            <to-view-id>/pages/client/client-index.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
             <from-action>#{clientNav.edit}</from-action>
             <from-outcome>client-edit</from-outcome>
             <to-view-id>/pages/client/client-edit.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{clientNav.put}</from-action>
-            <from-outcome>client-put</from-outcome>
-            <to-view-id>/pages/client/client-index.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{clientNav.delete}</from-action>
-            <from-outcome>client-delete</from-outcome>
-            <to-view-id>/pages/client/client-index.xhtml</to-view-id>
-            <redirect/>
         </navigation-case>
     </navigation-rule>
         
     <!-- Mechanics -->
     <navigation-rule>
         <from-view-id>*</from-view-id>
-            <navigation-case>
+        <navigation-case>
             <from-action>#{mechanicNav.index}</from-action>
             <from-outcome>mechanics</from-outcome>
             <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
@@ -125,21 +107,39 @@
             <to-view-id>/pages/mechanic/mechanic-show.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-action>#{mechanicNav.post}</from-action>
-            <from-outcome>mechanic-post</from-outcome>
-            <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
-            <redirect/>
+            <from-action>#{mechanicNav.create}</from-action>
+            <from-outcome>mechanic-create</from-outcome>
+            <to-view-id>/pages/mechanic/mechanic-create.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-action>#{mechanicNav.edit}</from-action>
             <from-outcome>mechanic-edit</from-outcome>
             <to-view-id>/pages/mechanic/mechanic-edit.xhtml</to-view-id>
         </navigation-case>
+    </navigation-rule>
+    
+    <!-- Replacement -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{mechanicNav.delete}</from-action>
-            <from-outcome>mechanic-delete</from-outcome>
-            <to-view-id>/pages/mechanic/mechanic-index.xhtml</to-view-id>
-            <redirect/>
+            <from-action>#{replacementNav.index}</from-action>
+            <from-outcome>replacements</from-outcome>
+            <to-view-id>/pages/replacement/replacement-index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{replacementNav.show}</from-action>
+            <from-outcome>replacement-show</from-outcome>
+            <to-view-id>/pages/replacement/replacement-show.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{replacementNav.create}</from-action>
+            <from-outcome>replacement-create</from-outcome>
+            <to-view-id>/pages/replacement/replacement-create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{replacementNav.edit}</from-action>
+            <from-outcome>replacement-edit</from-outcome>
+            <to-view-id>/pages/replacement/replacement-edit.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

@@ -6,12 +6,18 @@
 package models;
 
 import java.util.Date;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author jamar
  */
-public class ReplacementModel {
+@Named(value = "replacement")
+@RequestScoped
+public class Replacement {
+    
+    private int index;
     
     private int id;
     private String name;
@@ -21,6 +27,14 @@ public class ReplacementModel {
     private Date createdAt;
     private Date updatedAt;
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
     public int getId() {
         return id;
     }

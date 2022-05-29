@@ -21,7 +21,7 @@
                     <i class="fa-solid fa-plus"></i>
                 </h:commandLink>
             </div>
-            
+
             <h:form rendered="#{mechanicController.mechanics.size()==0}">
                 <div class="alert alert-warning text-center">
                     <h:outputLabel class="fw-bold" value="No hay datos"/>
@@ -67,16 +67,22 @@
                         <f:param name="id" value="#{data.id}"></f:param>
                         <i class="fa-solid fa-edit"></i>
                     </h:commandLink>
-                    
+
                     <h:commandLink class="btn btn-primary me-2" rendered="#{data.status}" action="#{mechanicController.isEnable(data)}">
                         <i class="fa-solid fa-unlock"></i>
                     </h:commandLink>
-                    
+
                     <h:commandLink class="btn btn-danger me-2" rendered="#{!data.status}" action="#{mechanicController.isEnable(data)}">
                         <i class="fa-solid fa-lock"></i>
                     </h:commandLink>
                 </h:column>
             </h:dataTable>
+        </h:form>
+
+        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{mechanicController.mechanics.size()==0}">
+            <div class="alert alert-warning text-center">
+                <h:outputLabel class="fw-bold" value="No hay datos"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

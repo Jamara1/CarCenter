@@ -56,12 +56,12 @@
                 </h:column>
 
             </h:dataTable>
-            
-            <h:form class="animate__animated animate__fadeIn" rendered="#{documentTypeController.documentTypes.size()==0}">
-                <div class="alert alert-warning text-center">
-                    <h:outputLabel class="fw-bold" value="No hay datos"/>
-                </div>
-            </h:form>
+        </h:form>
+
+        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{documentTypeController.documentTypes.size()==0}">
+            <div class="alert alert-warning text-center">
+                <h:outputLabel class="fw-bold" value="No hay datos"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

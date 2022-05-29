@@ -13,58 +13,92 @@
     <ui:define name="body">
         <h2>Repuestos</h2>
         <hr></hr>
-        
+
         <h:form>
             <div class="row">
                 <div class="col-4">
                     <h:outputLabel class="form-label" value="Nombre"/>
-                    <h:inputText class="form-control" value="#{replacementController.replacement.name}"/>
+                    <h:inputText class="form-control" autocomplete="off" 
+                                 value="#{replacement.name}"
+                                 required="true" 
+                                 requiredMessage="Nombre es obligatorio"/>
                 </div>
 
                 <div class="col-4">
                     <h:outputLabel class="form-label" value="Precio X unidad"/>
-                    <h:inputText class="form-control" value="#{replacementController.replacement.price}"/>
+                    <h:inputText class="form-control" value="#{replacement.price}"/>
                 </div>
-                
+
                 <div class="col-4">
                     <h:outputLabel class="form-label" value="Cantidad"/>
-                    <h:inputText class="form-control" value="#{replacementController.replacement.quantity}"/>
+                    <h:inputText class="form-control" value="#{replacement.quantity}">
+                        <f:validateRequired/>
+                    </h:inputText>
                 </div>
             </div>
 
-            <h:messages></h:messages>
+            <h:messages class="text-danger"></h:messages>
 
             <br></br>
 
-            <h:commandButton class="btn btn-dark" value="Add" action="#{replacementController.addReplacement()}"/>
+            <div class="w-full text-end">
+                <h:commandLink class="btn btn-dark" action="#{replacementNav.post(replacement)}">
+                    <i class="fa-solid fa-plus"></i>
+                </h:commandLink>
+            </div>
 
-            <h:dataTable value="#{replacementController.listReplacement}" var="data">
+            <h:dataTable class="table animate__animated animate__fadeIn" value="#{replacementController.replacements}" var="data"
+                         rendered="#{replacementController.replacements.size() > 0}">
 
                 <h:column>
-                    <h:outputLabel value="#{data.id}"/>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputLabel value="#{data.index}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Nombre</f:facet>
                     <h:outputLabel value="#{data.name}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Precio</f:facet>
                     <h:outputLabel value="#{data.price}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Cantidad</f:facet>
                     <h:outputLabel value="#{data.quantity}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Fecha creación</f:facet>
                     <h:outputLabel value="#{data.createdAt}"/>
                 </h:column>
 
                 <h:column>
-                    <h:commandLink class="btn btn-danger" value="Delete" action="#{replacementController.isReplacement(data)}"/>
+                    <f:facet name="header">Opciones</f:facet>
+
+                    <h:commandLink class="btn btn-success me-2" action="#{replacementNav.edit(data.id)}">
+                        <f:param name="id" value="#{data.id}"></f:param>
+                        <i class="fa-solid fa-edit"></i>
+                    </h:commandLink>
+
+                    <h:commandLink class="btn btn-primary me-2" rendered="#{data.status}" action="#{replacementController.isEnable(data)}">
+                        <i class="fa-solid fa-unlock"></i>
+                    </h:commandLink>
+
+                    <h:commandLink class="btn btn-danger me-2" rendered="#{!data.status}" action="#{replacementController.isEnable(data)}">
+                        <i class="fa-solid fa-lock"></i>
+                    </h:commandLink>
                 </h:column>
 
             </h:dataTable>
+        </h:form>
+
+        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{replacementController.replacements.size()==0}">
+            <div class="alert alert-warning text-center">
+                <h:outputLabel class="fw-bold" value="No hay datos"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>
