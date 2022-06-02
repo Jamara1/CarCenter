@@ -33,7 +33,7 @@ public class SiteController {
     public ArrayList<Site> getSites() throws SQLException {
         ArrayList<Site> listSite = new ArrayList<>();
         
-        sql = "SELECT * FROM JAMARA.TB_SITE ORDER BY ID_SITE ASC";
+        sql = "SELECT * FROM TB_SITE ORDER BY ID_SITE ASC";
         int i = 1;
 
         try {
@@ -67,7 +67,7 @@ public class SiteController {
             return;
         }
 
-        sql = "INSERT INTO JAMARA.TB_SITE "
+        sql = "INSERT INTO TB_SITE "
                 + "(NAME)"
                 + " VALUES"
                 + "(?)";
@@ -92,7 +92,7 @@ public class SiteController {
             return;
         }
 
-        sql = "UPDATE JAMARA.TB_SITE SET TYPE_NAME = ?,"
+        sql = "UPDATE TB_SITE SET TYPE_NAME = ?,"
                 + " UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_SITE = ?";
 
         try {
@@ -111,7 +111,7 @@ public class SiteController {
     }
 
     public void destroy(Site site) throws SQLException {
-        sql = "UPDATE JAMARA.TB_SITE SET STATUS = ? WHERE ID_SITE = ?";
+        sql = "UPDATE TB_SITE SET STATUS = ? WHERE ID_SITE = ?";
 
         try {
             conn = connectionDb.getConnection();

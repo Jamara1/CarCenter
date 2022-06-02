@@ -147,9 +147,24 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-action>#{listNav.showCar}</from-action>
+            <from-action>#{carNav.index}</from-action>
             <from-outcome>cars</from-outcome>
             <to-view-id>/pages/car/car-index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{carNav.show}</from-action>
+            <from-outcome>car-show</from-outcome>
+            <to-view-id>/pages/car/car-show.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{carNav.create}</from-action>
+            <from-outcome>car-create</from-outcome>
+            <to-view-id>/pages/car/car-create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{carNav.edit}</from-action>
+            <from-outcome>car-edit</from-outcome>
+            <to-view-id>/pages/car/car-edit.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
         
@@ -183,16 +198,6 @@
             <from-outcome>site-delete</from-outcome>
             <to-view-id>/pages/site/site-index.xhtml</to-view-id>
             <redirect/>
-        </navigation-case>
-    </navigation-rule>
-        
-    <!-- Replacements -->
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-action>#{listNav.showReplacement}</from-action>
-            <from-outcome>replacements</from-outcome>
-            <to-view-id>/pages/replacement/replacement-index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <!-- ::::: End routes ::::: -->

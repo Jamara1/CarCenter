@@ -41,7 +41,7 @@ public class ClientNav {
     }
     
     public String edit(int id) throws SQLException {
-        controller.getClient(id);
+        controller.edit(id);
         
         return "client-edit";
     }

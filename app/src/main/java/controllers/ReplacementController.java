@@ -22,7 +22,8 @@ import models.Replacement;
 @Named(value = "replacementController")
 @RequestScoped
 public class ReplacementController {
-/* SQL */
+
+    /* SQL */
     PreparedStatement ps;
     ResultSet rs;
     ConnectionController connectionDb = new ConnectionController();
@@ -32,7 +33,7 @@ public class ReplacementController {
     /* Methods */
     public ArrayList<Replacement> getReplacements() throws SQLException {
         ArrayList<Replacement> listReplacement = new ArrayList<>();
-        
+
         sql = "SELECT * FROM TB_REPLACEMENT ORDER BY ID_REPLACEMENT ASC";
         int i = 1;
 
@@ -69,7 +70,7 @@ public class ReplacementController {
             return;
         }
 
-        sql = "INSERT INTO JAMARA.TB_REPLACEMENT "
+        sql = "INSERT INTO TB_REPLACEMENT "
                 + "(NAME, PRICE, QUANTITY)"
                 + " VALUES"
                 + "(?, ?, ?)";
@@ -91,7 +92,7 @@ public class ReplacementController {
 
     public void getReplacement(int id) throws SQLException {
         Replacement d = null;
-        sql = "SELECT * FROM JAMARA.TB_REPLACEMENT WHERE ID_REPLACEMENT = " + id;
+        sql = "SELECT * FROM TB_REPLACEMENT WHERE ID_REPLACEMENT = " + id;
 
         try {
             conn = connectionDb.getConnection();
@@ -115,7 +116,7 @@ public class ReplacementController {
     }
 
     public void update(Replacement replacement) throws SQLException {
-        sql = "UPDATE JAMARA.TB_REPLACEMENT SET NAME = ?, "
+        sql = "UPDATE TB_REPLACEMENT SET NAME = ?, "
                 + "UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_REPLACEMENT = ?";
 
         try {
@@ -132,17 +133,14 @@ public class ReplacementController {
         }
     }
 
-    public void destroy(Replacement replacement) throws SQLException {
-        if (replacement.getId() == 0) {
-            return;
-        }
-
-        sql = "DELETE FROM JAMARA.TB_REPLACEMENT WHERE ID_REPLACEMENT = ?";
+    public void isEnable(Replacement replacement) throws SQLException {
+        sql = "UPDATE TB_REPLACEMENT SET STATUS = ? WHERE ID_REPLACEMENT = ?";
 
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, replacement.getId());
+            ps.setBoolean(1, !replacement.isStatus());
+            ps.setInt(2, replacement.getId());
             ps.executeUpdate();
 
         } catch (SQLException e) {

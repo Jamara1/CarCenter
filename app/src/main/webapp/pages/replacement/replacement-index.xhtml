@@ -46,7 +46,9 @@
                     <i class="fa-solid fa-plus"></i>
                 </h:commandLink>
             </div>
+        </h:form>
 
+        <h:form>
             <h:dataTable class="table animate__animated animate__fadeIn" value="#{replacementController.replacements}" var="data"
                          rendered="#{replacementController.replacements.size() > 0}">
 
@@ -83,15 +85,14 @@
                         <i class="fa-solid fa-edit"></i>
                     </h:commandLink>
 
-                    <h:commandLink class="btn btn-primary me-2" rendered="#{data.status}" action="#{replacementController.isEnable(data)}">
+                    <h:commandLink class="btn btn-primary me-2" rendered="#{data.status}" action="#{replacementNav.setStatus(data)}">
                         <i class="fa-solid fa-unlock"></i>
                     </h:commandLink>
 
-                    <h:commandLink class="btn btn-danger me-2" rendered="#{!data.status}" action="#{replacementController.isEnable(data)}">
+                    <h:commandLink class="btn btn-danger me-2" rendered="#{!data.status}" action="#{replacementNav.setStatus(data)}">
                         <i class="fa-solid fa-lock"></i>
                     </h:commandLink>
                 </h:column>
-
             </h:dataTable>
         </h:form>
 

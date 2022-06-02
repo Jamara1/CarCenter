@@ -31,7 +31,7 @@ public class ClientController {
     /* Methods */
     public ArrayList<Client> getClients() throws SQLException {
         ArrayList<Client> listClient = new ArrayList();
-        sql = "SELECT * FROM JAMARA.TB_CLIENT ORDER BY ID_CLIENT ASC";
+        sql = "SELECT * FROM TB_CLIENT ORDER BY ID_CLIENT ASC";
         int i = 1;
 
         try {
@@ -74,7 +74,7 @@ public class ClientController {
     }
 
     public void store(Client client) throws SQLException {
-        sql = "INSERT INTO JAMARA.TB_CLIENT "
+        sql = "INSERT INTO TB_CLIENT "
                 + "(FIRST_NAME, LAST_NAME, FIRST_SURNAME, SECOND_SURNAME, ID_DOCUMENT_TYPE, DOCUMENT_NUMBER, CELLPHONE, ADDRESS, EMAIL)"
                 + " VALUES"
                 + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -99,9 +99,9 @@ public class ClientController {
         }
     }
 
-    public void getClient(int id) throws SQLException {
+    public Client getClient(int id) throws SQLException {
         Client c = null;
-        sql = "SELECT * FROM JAMARA.TB_CLIENT WHERE ID_CLIENT = " + id;
+        sql = "SELECT * FROM TB_CLIENT WHERE ID_CLIENT = " + id;
 
         try {
             conn = connectionDb.getConnection();
@@ -115,6 +115,12 @@ public class ClientController {
                 c.setLastName(rs.getString(3));
                 c.setFirstSurname(rs.getString(4));
                 c.setSecondSurname(rs.getString(5));
+                c.setFullName(c.strFullName(
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)
+                ));
                 c.setIdDocumentType(rs.getInt(6));
                 c.setDocumentNumber(rs.getString(7));
                 c.setCellphone(rs.getString(8));
@@ -124,17 +130,21 @@ public class ClientController {
                 c.setCreatedAt(rs.getDate(12));
                 c.setUpdatedAt(rs.getDate(13));
             }
-
-            connectionDb.saveData("editClient", c);
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
             conn.close();
         }
+        
+        return c;
+    }
+    
+    public void edit(int id) throws SQLException {
+        connectionDb.saveData("editClient", getClient(id));
     }
 
     public void update(Client client) throws SQLException {
-        sql = "UPDATE JAMARA.TB_CLIENT SET FIRST_NAME = ?, LAST_NAME = ?, "
+        sql = "UPDATE TB_CLIENT SET FIRST_NAME = ?, LAST_NAME = ?, "
                 + "FIRST_SURNAME = ?, SECOND_SURNAME = ?, ID_DOCUMENT_TYPE = ?, "
                 + "DOCUMENT_NUMBER = ?, CELLPHONE = ?, ADDRESS = ?, "
                 + "EMAIL = ?, UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_CLIENT = ?";
@@ -163,7 +173,7 @@ public class ClientController {
     }
 
     public void isEnable(Client client) throws SQLException {
-        sql = "UPDATE JAMARA.TB_CLIENT SET STATUS = ? WHERE ID_CLIENT = ?";
+        sql = "UPDATE TB_CLIENT SET STATUS = ? WHERE ID_CLIENT = ?";
 
         try {
             conn = connectionDb.getConnection();

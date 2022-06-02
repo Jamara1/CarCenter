@@ -5,8 +5,8 @@
  */
 package models;
 
-import java.util.Date;
-import javax.enterprise.context.RequestScoped;
+import java.sql.Date;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 /**
@@ -14,7 +14,7 @@ import javax.inject.Named;
  * @author jamar
  */
 @Named(value = "replacement")
-@RequestScoped
+@ApplicationScoped
 public class Replacement {
     
     private int index;

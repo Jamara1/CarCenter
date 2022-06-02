@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      template="/template/template.xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="head">
         <title>CC | Carros</title>
@@ -13,61 +13,94 @@
     <ui:define name="body">
         <h2>Carros</h2>
         <hr></hr>
-        
+
         <h:form>
             <div class="row">
-                <div class="col-12">
+                <div class="col-4">
                     <h:outputLabel class="form-label" value="Cliente"/>
-                    <h:selectOneMenu class="col-12 form-select" value="#{carController.car.idClient}">
-                        <f:selectItem itemLabel="Seleccione..." itemValue="#{null}" noSelectionOption="true"/>
-                        <f:selectItems value="#{clientController.listClient}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{clientModel.getFullName(data)}"/>
+                    <h:selectOneMenu class="col-12 form-select" value="#{carM.idClient}">
+                        <f:selectItem itemLabel="Seleccione..."/>
+                        <f:selectItems value="#{clientController.clients}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{data.fullName}"/>
                     </h:selectOneMenu>
                 </div>
 
-                <div class="col-6">
+                <div class="col-4">
                     <h:outputLabel class="form-label" value="Placa"/>
-                    <h:inputText class="form-control" value="#{carController.car.placa}"/>
+                    <h:inputText class="form-control" autocomplete="off" 
+                                 value="#{carM.placa}"
+                                 required="true" 
+                                 requiredMessage="Nombre es obligatorio"/>
                 </div>
-                
-                <div class="col-6">
+
+                <div class="col-4">
                     <h:outputLabel class="form-label" value="Marca"/>
-                    <h:inputText class="form-control" value="#{carController.car.brand}"/>
+                    <h:inputText class="form-control" value="#{carM.brand}"/>
                 </div>
             </div>
 
-            <h:messages></h:messages>
+            <h:messages class="text-danger"></h:messages>
 
             <br></br>
 
-            <h:commandButton class="btn btn-dark" value="Add" action="#{carController.addCar()}"/>
+            <div class="w-full text-end">
+                <h:commandLink class="btn btn-dark" action="#{carNav.post(carM)}">
+                    <i class="fa-solid fa-plus"></i>
+                </h:commandLink>
+            </div>
+        </h:form>
 
-            <h:dataTable value="#{carController.listCar}" var="data">
+        <h:form>
+            <h:dataTable class="table animate__animated animate__fadeIn" value="#{carController.cars}" var="data"
+                         rendered="#{carController.cars.size() > 0}">
 
                 <h:column>
-                    <h:outputLabel value="#{data.id}"/>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputLabel value="#{data.index}"/>
                 </h:column>
 
                 <h:column>
-                    <h:outputLabel value="#{data.idClient}"/>
+                    <f:facet name="header">Cliente</f:facet>
+                    <h:outputLabel value="#{data.client.fullName}"/>
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Placa</f:facet>
                     <h:outputLabel value="#{data.placa}"/>
                 </h:column>
-                
+
                 <h:column>
+                    <f:facet name="header">Marca</f:facet>
                     <h:outputLabel value="#{data.brand}"/>
                 </h:column>
-                
+
                 <h:column>
+                    <f:facet name="header">Fecha creación</f:facet>
                     <h:outputLabel value="#{data.createdAt}"/>
                 </h:column>
 
                 <h:column>
-                    <h:commandLink class="btn btn-danger" value="Delete" action="#{documentTypeController.isDocumentType(data)}"/>
-                </h:column>
+                    <f:facet name="header">Opciones</f:facet>
 
+                    <h:commandLink class="btn btn-success me-2" action="#{carNav.edit(data.id)}">
+                        <f:param name="id" value="#{data.id}"></f:param>
+                        <i class="fa-solid fa-edit"></i>
+                    </h:commandLink>
+
+                    <h:commandLink class="btn btn-primary me-2" rendered="#{data.status}" action="#{carNav.setStatus(data)}">
+                        <i class="fa-solid fa-unlock"></i>
+                    </h:commandLink>
+
+                    <h:commandLink class="btn btn-danger me-2" rendered="#{!data.status}" action="#{carNav.setStatus(data)}">
+                        <i class="fa-solid fa-lock"></i>
+                    </h:commandLink>
+                </h:column>
             </h:dataTable>
+        </h:form>
+
+        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{carController.cars.size()==0}">
+            <div class="alert alert-warning text-center">
+                <h:outputLabel class="fw-bold" value="No hay datos"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -51,8 +51,8 @@ public class ReplacementNav {
         return "replacement-put";
     }
     
-    public String delete(Replacement replacement) throws SQLException {
-        controller.destroy(replacement);
+    public String setStatus(Replacement replacement) throws SQLException {
+        controller.isEnable(replacement);
         
         return "replacement-index.xhtml?faces-redirect=true";
     }

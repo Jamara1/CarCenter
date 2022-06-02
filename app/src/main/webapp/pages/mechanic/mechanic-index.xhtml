@@ -22,12 +22,6 @@
                 </h:commandLink>
             </div>
 
-            <h:form rendered="#{mechanicController.mechanics.size()==0}">
-                <div class="alert alert-warning text-center">
-                    <h:outputLabel class="fw-bold" value="No hay datos"/>
-                </div>
-            </h:form>
-
             <h:dataTable class="table" value="#{mechanicController.mechanics}" var="data" 
                          rendered="#{mechanicController.mechanics.size()>0}">
                 <h:column>

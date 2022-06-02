@@ -35,15 +35,15 @@
                                     Personas
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                     <li>
+                                        <h:commandLink class="dropdown-item" value="Tipo documento" action="#{documentTypeNav.index}"></h:commandLink>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></hr></li>
                                     <li>
                                         <h:commandLink class="dropdown-item" value="Clientes" action="#{clientNav.index}"></h:commandLink>
                                     </li>
                                     <li>
                                         <h:commandLink class="dropdown-item" value="Mecanicos" action="#{mechanicNav.index}"></h:commandLink>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></hr></li>
-                                    <li>
-                                        <h:commandLink class="dropdown-item" value="Tipo documento" action="#{documentTypeNav.index}"></h:commandLink>
                                     </li>
                                 </ul>
                             </li>
@@ -59,10 +59,14 @@
                                     <li>
                                         <h:commandLink class="dropdown-item" value="Repuestos" action="#{replacementNav.index}"></h:commandLink>
                                     </li>
+                                    <li><hr class="dropdown-divider"></hr></li>
+                                    <li>
+                                        <h:commandLink class="dropdown-item" value="Inventario" action="#{documentTypeNav.index}"></h:commandLink>
+                                    </li>
                                 </ul>
                             </li>                          
                             <li class="nav-item">
-                                <h:commandLink class="nav-link" value="Carros" action="#{listNav.showCar}"></h:commandLink>
+                                <h:commandLink class="nav-link" value="Carros" action="#{carNav.index}"></h:commandLink>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink class="nav-link" value="Incidencias" action="pages/car/car-index"></h:commandLink>

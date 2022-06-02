@@ -66,7 +66,7 @@ public class DocumentTypeController {
             return;
         }
 
-        sql = "INSERT INTO JAMARA.TB_DOCUMENT_TYPE "
+        sql = "INSERT INTO TB_DOCUMENT_TYPE "
                 + "(NAME)"
                 + " VALUES"
                 + "(?)";
@@ -87,7 +87,7 @@ public class DocumentTypeController {
 
     public void getDocumentType(int id) throws SQLException {
         DocumentType d = null;
-        sql = "SELECT * FROM JAMARA.TB_DOCUMENT_TYPE WHERE ID_DOCUMENT_TYPE = " + id;
+        sql = "SELECT * FROM TB_DOCUMENT_TYPE WHERE ID_DOCUMENT_TYPE = " + id;
 
         try {
             conn = connectionDb.getConnection();
@@ -111,7 +111,7 @@ public class DocumentTypeController {
     }
 
     public void update(DocumentType documentType) throws SQLException {
-        sql = "UPDATE JAMARA.TB_DOCUMENT_TYPE SET NAME = ?, "
+        sql = "UPDATE TB_DOCUMENT_TYPE SET NAME = ?, "
                 + "UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_DOCUMENT_TYPE = ?";
 
         try {
@@ -134,7 +134,7 @@ public class DocumentTypeController {
             return;
         }
 
-        sql = "DELETE FROM JAMARA.TB_DOCUMENT_TYPE WHERE ID_DOCUMENT_TYPE = ?";
+        sql = "DELETE FROM TB_DOCUMENT_TYPE WHERE ID_DOCUMENT_TYPE = ?";
 
         try {
             conn = connectionDb.getConnection();

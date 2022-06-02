@@ -34,7 +34,7 @@ public class MechanicController {
     public ArrayList<Mechanic> getMechanics() throws SQLException {
         ArrayList<Mechanic> listMechanic = new ArrayList<>();
         
-        sql = "SELECT * FROM JAMARA.TB_MECHANIC ORDER BY ID_MECHANIC ASC";
+        sql = "SELECT * FROM TB_MECHANIC ORDER BY ID_MECHANIC ASC";
         int i = 1;
 
         try {
@@ -77,7 +77,7 @@ public class MechanicController {
     }
 
     public void store(Mechanic mechanic) throws SQLException {
-        sql = "INSERT INTO JAMARA.TB_MECHANIC "
+        sql = "INSERT INTO TB_MECHANIC "
                 + "(FIRST_NAME, LAST_NAME, FIRST_SURNAME, SECOND_SURNAME, ID_DOCUMENT_TYPE, DOCUMENT_NUMBER, CELLPHONE, ADDRESS, EMAIL)"
                 + " VALUES"
                 + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -105,7 +105,7 @@ public class MechanicController {
 
     public void getMechanic(int id) throws SQLException {
         Mechanic m = null;
-        sql = "SELECT * FROM JAMARA.TB_MECHANIC WHERE ID_MECHANIC = " + id;
+        sql = "SELECT * FROM TB_MECHANIC WHERE ID_MECHANIC = " + id;
 
         try {
             conn = connectionDb.getConnection();
@@ -138,7 +138,7 @@ public class MechanicController {
     }
 
     public void update(Mechanic mechanic) throws SQLException {
-        sql = "UPDATE JAMARA.TB_MECHANIC SET FIRST_NAME = ?, LAST_NAME = ?, "
+        sql = "UPDATE TB_MECHANIC SET FIRST_NAME = ?, LAST_NAME = ?, "
                 + "FIRST_SURNAME = ?, SECOND_SURNAME = ?, ID_DOCUMENT_TYPE = ?, "
                 + "DOCUMENT_NUMBER = ?, CELLPHONE = ?, ADDRESS = ?, "
                 + "EMAIL = ?, UPDATED_AT = CURRENT_TIMESTAMP WHERE ID_MECHANIC = ?";
@@ -166,7 +166,7 @@ public class MechanicController {
     }
 
     public void isEnable(Mechanic mechanic) throws SQLException {
-        sql = "UPDATE JAMARA.TB_MECHANIC SET STATUS = ? WHERE ID_MECHANIC = ?";
+        sql = "UPDATE TB_MECHANIC SET STATUS = ? WHERE ID_MECHANIC = ?";
 
         try {
             conn = connectionDb.getConnection();
