@@ -6,18 +6,32 @@
 package models;
 
 import java.util.Date;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author jamar
  */
-public class BillModel {
-     private int id;
-    private int idService;
-    private int idBillReplacement;
+@Named(value = "bill")
+@ApplicationScoped
+public class Bill {
+    private int index;
+    
+    private int id;
+    private int idBillService;
+    private int idBillReplacementSite;
     private boolean status;
     private Date createdAt;
     private Date updatedAt;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public int getId() {
         return id;
@@ -27,20 +41,20 @@ public class BillModel {
         this.id = id;
     }
 
-    public int getIdService() {
-        return idService;
+    public int getIdBillService() {
+        return idBillService;
     }
 
-    public void setIdService(int idService) {
-        this.idService = idService;
+    public void setIdBillService(int idBillService) {
+        this.idBillService = idBillService;
     }
 
-    public int getIdBillReplacement() {
-        return idBillReplacement;
+    public int getIdBillReplacementSite() {
+        return idBillReplacementSite;
     }
 
-    public void setIdBillReplacement(int idBillReplacement) {
-        this.idBillReplacement = idBillReplacement;
+    public void setIdBillReplacementSite(int idBillReplacementSite) {
+        this.idBillReplacementSite = idBillReplacementSite;
     }
 
     public boolean isStatus() {
@@ -66,5 +80,6 @@ public class BillModel {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+    
     
 }

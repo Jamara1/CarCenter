@@ -40,7 +40,7 @@ public class ReplacementNav {
     }
     
     public String edit(int id) throws SQLException {
-        controller.getReplacement(id);
+        controller.edit(id);
         
         return "replacement-index.xhtml?faces-redirect=true";
     }

@@ -31,10 +31,15 @@ public class MechanicController {
     String sql;
 
     /* Methods */
-    public ArrayList<Mechanic> getMechanics() throws SQLException {
+    public ArrayList<Mechanic> getMechanics(boolean option) throws SQLException {
         ArrayList<Mechanic> listMechanic = new ArrayList<>();
         
-        sql = "SELECT * FROM TB_MECHANIC ORDER BY ID_MECHANIC ASC";
+        if (option) {
+            sql = "SELECT * FROM TB_MECHANIC WHERE STATUS = 1 ORDER BY ID_MECHANIC ASC";
+        } else {
+            sql = "SELECT * FROM TB_MECHANIC ORDER BY ID_MECHANIC ASC";
+        }
+        
         int i = 1;
 
         try {

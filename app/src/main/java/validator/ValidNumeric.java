@@ -22,21 +22,16 @@ public class ValidNumeric implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String numeric = value.toString().trim();
-        boolean isNumeric;
         
-        if (numeric.length() == 0) {
-            throw new ValidatorException(new FacesMessage("Campo obligatorio"));
+        if (numeric.equals("0")) {
+            throw new ValidatorException(new FacesMessage("Debe ser diferente a 0"));
         } else {
-            try {
-                Integer.parseInt(numeric);
-                isNumeric = true;
-            } catch (Exception e) {
-                System.out.println(e);
-                isNumeric = false;
-            }
+            String textFormat = "[0-9]*"; 
+            
+            boolean isNumeric = Pattern.matches(textFormat, numeric);
             
             if (!isNumeric) {
-                throw new ValidatorException(new FacesMessage("Debe ser numerico"));
+                throw new ValidatorException(new FacesMessage("Solo ingrese numeros"));
             }
         }
     }

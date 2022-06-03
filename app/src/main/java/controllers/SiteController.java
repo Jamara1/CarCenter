@@ -30,10 +30,15 @@ public class SiteController {
     String sql;
 
     /* Methods */
-    public ArrayList<Site> getSites() throws SQLException {
+    public ArrayList<Site> getSites(boolean option) throws SQLException {
         ArrayList<Site> listSite = new ArrayList<>();
         
-        sql = "SELECT * FROM TB_SITE ORDER BY ID_SITE ASC";
+        if (option) {
+            sql = "SELECT * FROM TB_SITE WHERE STATUS = 1 ORDER BY ID_SITE ASC";
+        } else {
+            sql = "SELECT * FROM TB_SITE ORDER BY ID_SITE ASC";
+        }
+        
         int i = 1;
 
         try {
@@ -85,6 +90,32 @@ public class SiteController {
             conn.close();
         }
     }
+    
+    public Site getSite(int id) throws SQLException {
+        Site s = null;
+        sql = "SELECT * FROM TB_SITE WHERE ID_SITE = " + id;
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                s = new Site();
+                s.setId(rs.getInt(1));
+                s.setName(rs.getString(2));
+                s.setStatus(rs.getBoolean(3));
+                s.setCreatedAt(rs.getDate(4));
+                s.setUpdatedAt(rs.getDate(5));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
+
+        return s;
+    }
 
     public void update(Site site) throws SQLException {
 
@@ -110,7 +141,7 @@ public class SiteController {
         }
     }
 
-    public void destroy(Site site) throws SQLException {
+    public void isEnable(Site site) throws SQLException {
         sql = "UPDATE TB_SITE SET STATUS = ? WHERE ID_SITE = ?";
 
         try {

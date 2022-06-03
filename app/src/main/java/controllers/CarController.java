@@ -30,10 +30,15 @@ public class CarController {
     String sql;
 
     /* Methods */
-    public ArrayList<Car> getCars() throws SQLException {
+    public ArrayList<Car> getCars(boolean option) throws SQLException {
         ArrayList<Car> listCar = new ArrayList<>();
 
-        sql = "SELECT * FROM TB_CAR ORDER BY ID_CAR ASC";
+        if (option) {
+            sql = "SELECT * FROM TB_CAR WHERE STATUS = 1 ORDER BY ID_CAR ASC";
+        } else {
+            sql = "SELECT * FROM TB_CAR ORDER BY ID_CAR ASC";
+        }
+        
         int i = 1;
 
         try {

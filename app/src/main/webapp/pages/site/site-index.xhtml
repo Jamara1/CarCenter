@@ -18,26 +18,25 @@
             <div class="row">
                 <div class="col-11">
                     <h:outputLabel class="form-label" value="Nombre"/>
-                    <h:inputText class="form-control" autocomplete="off" value="#{site.name}"/>
+                    <h:inputText class="form-control" id="name"
+                                 value="#{site.name}"
+                                 autocomplete="off" 
+                                 required="true" 
+                                 requiredMessage="Nombre es obligatorio"/>
+                    
+                    <h:message for="name" class="text-danger fs-6 fw-light"></h:message>
                 </div>
                 <div class="col-1 mt-4 text-end">
                     <h:commandLink class="btn btn-dark mt-2" action="#{siteNav.post(site)}">
                         <i class="fa-solid fa-plus"></i>
                     </h:commandLink>
                 </div>
-                <h:messages></h:messages>
             </div>
 
             <br></br>
 
-            <h:form rendered="#{siteController.sites.size()==0}">
-                <div class="alert alert-warning text-center">
-                    <h:outputLabel class="fw-bold" value="No hay datos"/>
-                </div>
-            </h:form>
-
-            <h:dataTable class="table animate__animated animate__fadeIn" value="#{siteController.sites}" var="data"
-                         rendered="#{siteController.sites.size()>0}">
+            <h:dataTable class="table animate__animated animate__fadeIn" value="#{siteController.getSites(false)}" var="data"
+                         rendered="#{siteController.getSites(false).size()>0}">
 
                 <h:column>
                     <f:facet name="header">#</f:facet>
@@ -60,13 +59,19 @@
                     <h:commandLink class="btn btn-primary me-2" rendered="#{data.status}" action="#{siteNav.delete(data)}">
                         <i class="fa-solid fa-unlock"></i>
                     </h:commandLink>
-                    
+
                     <h:commandLink class="btn btn-danger me-2" rendered="#{!data.status}" action="#{siteNav.delete(data)}">
                         <i class="fa-solid fa-lock"></i>
                     </h:commandLink>
                 </h:column>
 
             </h:dataTable>
+        </h:form>
+
+        <h:form rendered="#{siteController.getSites(false).size()==0}">
+            <div class="alert alert-warning text-center">
+                <h:outputLabel class="fw-bold" value="No hay datos"/>
+            </div>
         </h:form>
     </ui:define>
 </ui:composition>

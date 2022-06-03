@@ -31,10 +31,15 @@ public class ReplacementController {
     String sql;
 
     /* Methods */
-    public ArrayList<Replacement> getReplacements() throws SQLException {
+    public ArrayList<Replacement> getReplacements(boolean option) throws SQLException {
         ArrayList<Replacement> listReplacement = new ArrayList<>();
 
-        sql = "SELECT * FROM TB_REPLACEMENT ORDER BY ID_REPLACEMENT ASC";
+        if (option) {
+            sql = "SELECT * FROM TB_REPLACEMENT WHERE STATUS = 1 ORDER BY ID_REPLACEMENT ASC";
+        } else {
+            sql = "SELECT * FROM TB_REPLACEMENT ORDER BY ID_REPLACEMENT ASC";
+        }
+        
         int i = 1;
 
         try {
@@ -47,11 +52,10 @@ public class ReplacementController {
                 r.setIndex(i++);
                 r.setId(rs.getInt(1));
                 r.setName(rs.getString(2));
-                r.setPrice(rs.getInt(3));
-                r.setQuantity(rs.getInt(4));
-                r.setStatus(rs.getBoolean(5));
-                r.setCreatedAt(rs.getDate(6));
-                r.setUpdatedAt(rs.getDate(7));
+                r.setPrice(rs.getString(3));
+                r.setStatus(rs.getBoolean(4));
+                r.setCreatedAt(rs.getDate(5));
+                r.setUpdatedAt(rs.getDate(6));
 
                 listReplacement.add(r);
             }
@@ -65,22 +69,16 @@ public class ReplacementController {
     }
 
     public void store(Replacement replacement) throws SQLException {
-
-        if (replacement == null) {
-            return;
-        }
-
         sql = "INSERT INTO TB_REPLACEMENT "
-                + "(NAME, PRICE, QUANTITY)"
+                + "(NAME, PRICE)"
                 + " VALUES"
-                + "(?, ?, ?)";
+                + "(?, ?)";
 
         try {
             conn = connectionDb.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, replacement.getName());
-            ps.setInt(2, replacement.getPrice());
-            ps.setInt(3, replacement.getQuantity());
+            ps.setString(2, replacement.getPrice());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -89,9 +87,9 @@ public class ReplacementController {
             conn.close();
         }
     }
-
-    public void getReplacement(int id) throws SQLException {
-        Replacement d = null;
+    
+    public Replacement getReplacement(int id) throws SQLException {
+        Replacement r = null;
         sql = "SELECT * FROM TB_REPLACEMENT WHERE ID_REPLACEMENT = " + id;
 
         try {
@@ -100,19 +98,24 @@ public class ReplacementController {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                d = new Replacement();
-                d.setId(rs.getInt(1));
-                d.setName(rs.getString(2));
-                d.setCreatedAt(rs.getDate(3));
-                d.setUpdatedAt(rs.getDate(4));
+                r = new Replacement();
+                r.setId(rs.getInt(1));
+                r.setName(rs.getString(2));
+                r.setStatus(rs.getBoolean(3));
+                r.setCreatedAt(rs.getDate(4));
+                r.setUpdatedAt(rs.getDate(5));
             }
-
-            connectionDb.saveData("editDocument", d);
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
             conn.close();
         }
+
+        return r;
+    }
+    
+    public void edit(int id) throws SQLException {
+        connectionDb.saveData("editReplacement", getReplacement(id));
     }
 
     public void update(Replacement replacement) throws SQLException {

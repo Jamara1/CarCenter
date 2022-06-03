@@ -16,41 +16,42 @@
 
         <h:form>
             <div class="row">
-                <div class="col-4">
-                    <h:outputLabel class="form-label" value="Nombre"/>
-                    <h:inputText class="form-control" autocomplete="off" 
+                    <div class="col-6">
+                        <h:outputLabel class="form-label" value="Nombre"/>
+                        <h:inputText class="form-control" id="name"
                                  value="#{replacement.name}"
+                                 autocomplete="off" 
                                  required="true" 
                                  requiredMessage="Nombre es obligatorio"/>
-                </div>
+                    
+                    <h:message for="name" class="text-danger fs-6 fw-light"></h:message>
+                    </div>
 
-                <div class="col-4">
-                    <h:outputLabel class="form-label" value="Precio X unidad"/>
-                    <h:inputText class="form-control" value="#{replacement.price}"/>
-                </div>
-
-                <div class="col-4">
-                    <h:outputLabel class="form-label" value="Cantidad"/>
-                    <h:inputText class="form-control" value="#{replacement.quantity}">
-                        <f:validateRequired/>
-                    </h:inputText>
+                    <div class="col-5">
+                        <h:outputLabel class="form-label" value="Precio X unidad"/>
+                        <h:inputText class="form-control" id="price"
+                                     value="#{replacement.price}"
+                                     required="true"
+                                     requiredMessage="Precio obligatorio">
+                            
+                            <f:validator validatorId="validNumeric"/>
+                        </h:inputText>
+                        
+                        <h:message for="price" class="text-danger fs-6 fw-light"></h:message>
+                    </div>
+                <div class="col-1 mt-4 text-end">
+                    <h:commandLink class="btn btn-dark mt-2" action="#{replacementNav.post(replacement)}">
+                        <i class="fa-solid fa-plus"></i>
+                    </h:commandLink>
                 </div>
             </div>
-
-            <h:messages class="text-danger"></h:messages>
 
             <br></br>
-
-            <div class="w-full text-end">
-                <h:commandLink class="btn btn-dark" action="#{replacementNav.post(replacement)}">
-                    <i class="fa-solid fa-plus"></i>
-                </h:commandLink>
-            </div>
         </h:form>
 
         <h:form>
-            <h:dataTable class="table animate__animated animate__fadeIn" value="#{replacementController.replacements}" var="data"
-                         rendered="#{replacementController.replacements.size() > 0}">
+            <h:dataTable class="table animate__animated animate__fadeIn" value="#{replacementController.getReplacements(false)}" var="data"
+                         rendered="#{replacementController.getReplacements(false).size() > 0}">
 
                 <h:column>
                     <f:facet name="header">#</f:facet>
@@ -65,11 +66,6 @@
                 <h:column>
                     <f:facet name="header">Precio</f:facet>
                     <h:outputLabel value="#{data.price}"/>
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">Cantidad</f:facet>
-                    <h:outputLabel value="#{data.quantity}"/>
                 </h:column>
 
                 <h:column>
@@ -96,7 +92,7 @@
             </h:dataTable>
         </h:form>
 
-        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{replacementController.replacements.size()==0}">
+        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{replacementController.getReplacements(false).size()==0}">
             <div class="alert alert-warning text-center">
                 <h:outputLabel class="fw-bold" value="No hay datos"/>
             </div>

@@ -142,6 +142,31 @@
             <to-view-id>/pages/replacement/replacement-edit.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <!-- Replacement & Site -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{replacementSiteNav.index}</from-action>
+            <from-outcome>inventories</from-outcome>
+            <to-view-id>/pages/inventory/inventory-index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{replacementSiteNav.show}</from-action>
+            <from-outcome>inventory-show</from-outcome>
+            <to-view-id>/pages/inventory/inventory-show.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{replacementSiteNav.create}</from-action>
+            <from-outcome>inventory-create</from-outcome>
+            <to-view-id>/pages/inventory/inventory-create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{replacementSiteNav.edit}</from-action>
+            <from-outcome>inventory-edit</from-outcome>
+            <to-view-id>/pages/inventory/inventory-edit.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
     <!-- Cars -->
     <navigation-rule>
@@ -182,22 +207,45 @@
             <to-view-id>/pages/site/site-show.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-action>#{siteNav.post}</from-action>
-            <from-outcome>site-post</from-outcome>
-            <to-view-id>/pages/site/site-index.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
             <from-action>#{siteNav.edit}</from-action>
             <from-outcome>site-edit</from-outcome>
-            <to-view-id>/pages/site/site-index.xhtml</to-view-id>
-            <redirect/>
+            <to-view-id>/pages/site/site-edit.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Bill -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{billNav.index}</from-action>
+            <from-outcome>bills</from-outcome>
+            <to-view-id>/pages/bill/bill-index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-action>#{siteNav.delete}</from-action>
-            <from-outcome>site-delete</from-outcome>
-            <to-view-id>/pages/site/site-index.xhtml</to-view-id>
+            <from-action>#{billNav.show}</from-action>
+            <from-outcome>bill-show</from-outcome>
+            <to-view-id>/pages/bill/bill-show.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{billNav.create}</from-action>
+            <from-outcome>bill-create</from-outcome>
+            <to-view-id>/pages/bill/bill-create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{billNav.edit}</from-action>
+            <from-outcome>bill-edit</from-outcome>
+            <to-view-id>/pages/bill/bill-edit.xhtml</to-view-id>
             <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+        <!-- Reports -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{reportNav.index}</from-action>
+            <from-outcome>reports</from-outcome>
+            <to-view-id>/pages/reports/reports-index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <!-- ::::: End routes ::::: -->

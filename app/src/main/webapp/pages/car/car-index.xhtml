@@ -18,27 +18,44 @@
             <div class="row">
                 <div class="col-4">
                     <h:outputLabel class="form-label" value="Cliente"/>
-                    <h:selectOneMenu class="col-12 form-select" value="#{carM.idClient}">
+                    <h:selectOneMenu class="col-12 form-select" id="client"
+                                     value="#{carM.idClient}"
+                                     required="true"
+                                     requiredMessage="Cliente es obligatorio">
+
                         <f:selectItem itemLabel="Seleccione..."/>
-                        <f:selectItems value="#{clientController.clients}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{data.fullName}"/>
+                        <f:selectItems value="#{clientController.getClients(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{data.fullName}"/>
                     </h:selectOneMenu>
+
+                    <h:message for="client" class="text-danger fs-6 fw-light"></h:message>
                 </div>
 
                 <div class="col-4">
                     <h:outputLabel class="form-label" value="Placa"/>
-                    <h:inputText class="form-control" autocomplete="off" 
+                    <h:inputText class="form-control" id="placa"
+                                 autocomplete="off"
                                  value="#{carM.placa}"
+                                 maxlength="8"
                                  required="true" 
-                                 requiredMessage="Nombre es obligatorio"/>
+                                 requiredMessage="Placa es obligatoria">
+
+                        <f:validateLength minimum="4" maximum="8"/>
+                    </h:inputText>
+
+                    <h:message for="placa" class="text-danger fs-6 fw-light"></h:message>
                 </div>
 
                 <div class="col-4">
                     <h:outputLabel class="form-label" value="Marca"/>
-                    <h:inputText class="form-control" value="#{carM.brand}"/>
+                    <h:inputText class="form-control" id="brand"
+                                 autocomplete="off" 
+                                 value="#{carM.brand}"
+                                 required="true"
+                                 requiredMessage="Marca es obligatoria"/>
+
+                    <h:message for="brand" class="text-danger fs-6 fw-light"></h:message>
                 </div>
             </div>
-
-            <h:messages class="text-danger"></h:messages>
 
             <br></br>
 
@@ -50,8 +67,8 @@
         </h:form>
 
         <h:form>
-            <h:dataTable class="table animate__animated animate__fadeIn" value="#{carController.cars}" var="data"
-                         rendered="#{carController.cars.size() > 0}">
+            <h:dataTable class="table animate__animated animate__fadeIn" value="#{carController.getCars(false)}" var="data"
+                         rendered="#{carController.getCars(false).size() > 0}">
 
                 <h:column>
                     <f:facet name="header">#</f:facet>
@@ -97,7 +114,7 @@
             </h:dataTable>
         </h:form>
 
-        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{carController.cars.size()==0}">
+        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{carController.getCars(false).size()==0}">
             <div class="alert alert-warning text-center">
                 <h:outputLabel class="fw-bold" value="No hay datos"/>
             </div>

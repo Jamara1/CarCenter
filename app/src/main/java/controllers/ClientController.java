@@ -21,17 +21,24 @@ import models.Client;
 @Named(value = "clientController")
 @RequestScoped
 public class ClientController {
+
     /* SQL */
     PreparedStatement ps;
     ResultSet rs;
     ConnectionController connectionDb = new ConnectionController();
     Connection conn;
     String sql;
-    
+
     /* Methods */
-    public ArrayList<Client> getClients() throws SQLException {
+    public ArrayList<Client> getClients(boolean option) throws SQLException {
         ArrayList<Client> listClient = new ArrayList();
-        sql = "SELECT * FROM TB_CLIENT ORDER BY ID_CLIENT ASC";
+
+        if (option) {
+            sql = "SELECT * FROM TB_CLIENT WHERE STATUS = 1 ORDER BY ID_CLIENT ASC";
+        } else {
+            sql = "SELECT * FROM TB_CLIENT ORDER BY ID_CLIENT ASC";
+        }
+
         int i = 1;
 
         try {
@@ -135,10 +142,10 @@ public class ClientController {
         } finally {
             conn.close();
         }
-        
+
         return c;
     }
-    
+
     public void edit(int id) throws SQLException {
         connectionDb.saveData("editClient", getClient(id));
     }
@@ -164,7 +171,6 @@ public class ClientController {
             ps.setInt(10, client.getId());
             ps.executeUpdate();
 
-            
         } catch (SQLException e) {
             System.out.println(e);
         } finally {

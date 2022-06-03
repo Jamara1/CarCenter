@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/template.xhtml">
+
+    <ui:define name="head">
+        <title>CC | Inventario</title>
+    </ui:define>>
+
+    <ui:define name="body">
+        <h2>Inventario</h2>
+        <hr></hr>
+
+        <h:form>
+            <div class="row">
+                <div class="col-5">
+                    <h:outputLabel class="form-label" value="Sede"/>
+                    <h:selectOneMenu class="col-12 form-select" id="site"
+                                     value="#{replacementSite.idSite}"
+                                     required="true"
+                                     requiredMessage="Sede obligatoria">
+                        <f:selectItem itemLabel="Seleccione..."/>
+                        <f:selectItems value="#{siteController.getSites(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.name}"/>
+                    </h:selectOneMenu>
+                    
+                    <h:message for="site" class="text-danger fs-6 fw-light"></h:message>
+                </div>
+
+                <div class="col-5">
+                    <h:outputLabel class="form-label" value="Repuesto"/>
+                    <h:selectOneMenu class="col-12 form-select" id="replacement"
+                                     value="#{replacementSite.idReplacement}"
+                                     required="true"
+                                     requiredMessage="Repuesto obligatorio">
+                        <f:selectItem itemLabel="Seleccione..."/>
+                        <f:selectItems value="#{replacementController.getReplacements(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.name}"/>
+                    </h:selectOneMenu>
+                    
+                    <h:message for="replacement" class="text-danger fs-6 fw-light"></h:message>
+                </div>
+
+                <div class="col-2">
+                    <h:outputLabel class="form-label" value="Cantidad"/>
+                    <h:inputText class="form-control" id="quantity"
+                                 value="#{replacementSite.quantity}" 
+                                 required="true"
+                                 requiredMessage="Cantidad obligatoria">
+
+                        <f:validator validatorId="validNumeric"/>
+                    </h:inputText>
+
+                    <h:message for="quantity" class="text-danger fs-6 fw-light"></h:message>
+                </div>
+
+                <div class="col-12 text-end">
+                    <h:commandLink class="btn btn-dark mt-2" action="#{replacementSiteNav.post(replacementSite)}">
+                        <i class="fa-solid fa-plus"></i>
+                    </h:commandLink>
+                </div>
+            </div>
+
+            <br></br>
+
+            <h:dataTable class="table animate__animated animate__fadeIn" value="#{replacementSiteController.inventories}" var="data"
+                         rendered="#{replacementSiteController.inventories.size()>0}">
+
+                <h:column>
+                    <f:facet name="header">#</f:facet>
+                    <h:outputLabel class="fw-bold" value="#{data.index}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Sede</f:facet>
+                    <h:outputLabel value="#{data.site.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Repuesto</f:facet>
+                    <h:outputLabel value="#{data.replacement.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Cantidad</f:facet>
+                    <h:outputLabel value="#{data.quantity}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Fecha creación</f:facet>
+                    <h:outputLabel value="#{data.createdAt}"/>
+                </h:column>
+
+                <h:column class="text-center">
+                    <f:facet name="header">Opciones</f:facet>
+
+                    <h:commandLink class="btn btn-success me-2" action="#{replacementSiteNav.edit(data)}">
+                        <i class="fa-solid fa-edit"></i>
+                    </h:commandLink>
+                </h:column>
+
+            </h:dataTable>
+        </h:form>
+
+
+        <h:form rendered="#{replacementSiteController.inventories.size()==0}">
+            <div class="alert alert-warning text-center">
+                <h:outputLabel class="fw-bold" value="No hay datos"/>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -6,16 +6,30 @@
 package models;
 
 import java.util.Date;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author jamar
  */
-public class MechanicServiceModel {
+@Named(value = "mechanicService")
+@ApplicationScoped
+public class MechanicService {
+    private int index;
+    
     private int id;
     private int idMechanic;
     private Date createdAt;
     private Date updatedAt;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public int getId() {
         return id;
@@ -48,6 +62,4 @@ public class MechanicServiceModel {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-    
-    
 }

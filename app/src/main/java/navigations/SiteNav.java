@@ -51,7 +51,7 @@ public class SiteNav {
     }
     
     public String delete(Site site) throws SQLException {
-        controller.destroy(site);
+        controller.isEnable(site);
         
         return "site-index.xhtml?faces-redirect=true";
     }

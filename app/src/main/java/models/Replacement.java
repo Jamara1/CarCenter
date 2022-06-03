@@ -21,8 +21,7 @@ public class Replacement {
     
     private int id;
     private String name;
-    private int price;
-    private int quantity;
+    private String price;
     private boolean status;
     private Date createdAt;
     private Date updatedAt;
@@ -51,20 +50,12 @@ public class Replacement {
         this.name = name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public boolean isStatus() {
