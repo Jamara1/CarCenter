@@ -23,7 +23,7 @@
                                  autocomplete="off" 
                                  required="true" 
                                  requiredMessage="Nombre es obligatorio"/>
-                    
+
                     <h:message for="name" class="text-danger fs-6 fw-light"></h:message>
                 </div>
                 <div class="col-1 mt-4 text-end">
@@ -32,42 +32,44 @@
                     </h:commandLink>
                 </div>
             </div>
+        </h:form>
 
             <br></br>
 
-            <h:dataTable class="table animate__animated animate__fadeIn" value="#{documentTypeController.documentTypes}" var="data"
-                         rendered="#{documentTypeController.documentTypes.size()>0}">
+            <h:form>
+                <h:dataTable class="table animate__animated animate__fadeIn" value="#{documentTypeController.documentTypes}" var="data"
+                             rendered="#{documentTypeController.documentTypes.size()>0}">
 
-                <h:column>
-                    <f:facet name="header">#</f:facet>
-                    <h:outputLabel class="fw-bold" value="#{data.index}"/>
-                </h:column>
+                    <h:column>
+                        <f:facet name="header">#</f:facet>
+                        <h:outputLabel class="fw-bold" value="#{data.index}"/>
+                    </h:column>
 
-                <h:column>
-                    <f:facet name="header">Nombre</f:facet>
-                    <h:outputLabel value="#{data.name}"/>
-                </h:column>
+                    <h:column>
+                        <f:facet name="header">Nombre</f:facet>
+                        <h:outputLabel value="#{data.name}"/>
+                    </h:column>
 
-                <h:column>
-                    <f:facet name="header">Fecha creación</f:facet>
-                    <h:outputLabel value="#{data.createdAt}"/>
-                </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha creación</f:facet>
+                        <h:outputLabel value="#{data.createdAt}"/>
+                    </h:column>
 
-                <h:column class="text-center">
-                    <f:facet name="header">Opciones</f:facet>
-                    <h:commandLink class="btn btn-danger me-2" action="#{documentTypeNav.delete(data)}">
-                        <i class="fa-solid fa-trash"></i>
-                    </h:commandLink>
-                </h:column>
+                    <h:column class="text-center">
+                        <f:facet name="header">Opciones</f:facet>
+                        <h:commandLink class="btn btn-danger me-2" action="#{documentTypeNav.delete(data)}">
+                            <i class="fa-solid fa-trash"></i>
+                        </h:commandLink>
+                    </h:column>
 
-            </h:dataTable>
-        </h:form>
+                </h:dataTable>
+            </h:form>
 
-        <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{documentTypeController.documentTypes.size()==0}">
-            <div class="alert alert-warning text-center">
-                <h:outputLabel class="fw-bold" value="No hay datos"/>
-            </div>
-        </h:form>
+            <h:form class="my-4 animate__animated animate__fadeIn" rendered="#{documentTypeController.documentTypes.size()==0}">
+                <div class="alert alert-warning text-center">
+                    <h:outputLabel class="fw-bold" value="No hay datos"/>
+                </div>
+            </h:form>
     </ui:define>
 </ui:composition>
 

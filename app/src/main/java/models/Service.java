@@ -5,16 +5,21 @@
  */
 package models;
 
-import java.util.Date;
+import java.sql.Date;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author jamar
  */
-public class ServiceModel {
+@Named(value = "service")
+@ApplicationScoped
+public class Service {
      private int id;
     private int idCar;
-    private int idMechanicService;
+    private String price;
+    private String descpt;
     private boolean status;
     private Date createdAt;
     private Date updatedAt;
@@ -35,12 +40,20 @@ public class ServiceModel {
         this.idCar = idCar;
     }
 
-    public int getIdMechanicService() {
-        return idMechanicService;
+    public String getPrice() {
+        return price;
     }
 
-    public void setIdMechanicService(int idMechanicService) {
-        this.idMechanicService = idMechanicService;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getDescpt() {
+        return descpt;
+    }
+
+    public void setDescpt(String descpt) {
+        this.descpt = descpt;
     }
 
     public boolean isStatus() {
@@ -66,6 +79,5 @@ public class ServiceModel {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-    
     
 }

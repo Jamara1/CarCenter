@@ -21,11 +21,11 @@
                     <h:selectOneMenu class="col-12 form-select" id="site"
                                      value="#{replacementSite.idSite}"
                                      required="true"
-                                     requiredMessage="Sede obligatoria">
+                                     requiredMessage="Sede es obligatoria">
                         <f:selectItem itemLabel="Seleccione..."/>
                         <f:selectItems value="#{siteController.getSites(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.name}"/>
                     </h:selectOneMenu>
-                    
+
                     <h:message for="site" class="text-danger fs-6 fw-light"></h:message>
                 </div>
 
@@ -34,11 +34,11 @@
                     <h:selectOneMenu class="col-12 form-select" id="replacement"
                                      value="#{replacementSite.idReplacement}"
                                      required="true"
-                                     requiredMessage="Repuesto obligatorio">
+                                     requiredMessage="Repuesto es obligatorio">
                         <f:selectItem itemLabel="Seleccione..."/>
                         <f:selectItems value="#{replacementController.getReplacements(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.name}"/>
                     </h:selectOneMenu>
-                    
+
                     <h:message for="replacement" class="text-danger fs-6 fw-light"></h:message>
                 </div>
 
@@ -47,7 +47,7 @@
                     <h:inputText class="form-control" id="quantity"
                                  value="#{replacementSite.quantity}" 
                                  required="true"
-                                 requiredMessage="Cantidad obligatoria">
+                                 requiredMessage="Cantidad es obligatoria">
 
                         <f:validator validatorId="validNumeric"/>
                     </h:inputText>
@@ -61,9 +61,11 @@
                     </h:commandLink>
                 </div>
             </div>
+        </h:form>
 
-            <br></br>
+        <br></br>
 
+        <h:form>
             <h:dataTable class="table animate__animated animate__fadeIn" value="#{replacementSiteController.inventories}" var="data"
                          rendered="#{replacementSiteController.inventories.size()>0}">
 

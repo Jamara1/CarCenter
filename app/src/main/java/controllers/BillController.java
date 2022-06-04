@@ -34,7 +34,7 @@ public class BillController {
     public ArrayList<Bill> getBills() throws SQLException {
         ArrayList<Bill> listBill = new ArrayList<>();
 
-        sql = "SELECT * FROM TB_BILL ORDER BY ID_BILL ASC";
+        sql = "SELECT * FROM TB_BILL ORDER BY ID_CLIENT ASC";
 
         int i = 1;
 

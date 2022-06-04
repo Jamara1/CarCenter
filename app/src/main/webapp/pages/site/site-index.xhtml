@@ -23,7 +23,7 @@
                                  autocomplete="off" 
                                  required="true" 
                                  requiredMessage="Nombre es obligatorio"/>
-                    
+
                     <h:message for="name" class="text-danger fs-6 fw-light"></h:message>
                 </div>
                 <div class="col-1 mt-4 text-end">
@@ -32,9 +32,11 @@
                     </h:commandLink>
                 </div>
             </div>
+        </h:form>
 
-            <br></br>
+        <br></br>
 
+        <h:form>
             <h:dataTable class="table animate__animated animate__fadeIn" value="#{siteController.getSites(false)}" var="data"
                          rendered="#{siteController.getSites(false).size()>0}">
 

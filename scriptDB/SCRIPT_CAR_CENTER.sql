@@ -94,7 +94,7 @@ CREATE TABLE tb_mechanic_service
 -- FACTURAS AND MECHANIC SERVICE TABLE --
 CREATE TABLE tb_bill_mechanic_service
 (
-    id_bill_service INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
+    id_bill_mechanic_service INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
     id_mechanic_service INT NOT NULL,
     CONSTRAINT fk_mechanic_service FOREIGN KEY(id_mechanic_service) REFERENCES tb_mechanic_service(id_mechanic_service),
     -- Service status --
@@ -152,8 +152,8 @@ CREATE TABLE tb_bill_replacement_site
 CREATE TABLE tb_bill
 (
     id_bill INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
-    id_bill_service INT NOT NULL,
-    CONSTRAINT fk_bill_service FOREIGN KEY(id_bill_service) REFERENCES tb_bill_service(id_bill_service),
+    id_bill_mechanic_service INT NOT NULL,
+    CONSTRAINT fk_bill_mechanic_service FOREIGN KEY(id_bill_mechanic_service) REFERENCES tb_bill_mechanic_service(id_bill_mechanic_service),
     id_bill_replacement_site INT NOT NULL,
     CONSTRAINT fk_bill_replacement_site FOREIGN KEY(id_bill_replacement_site) REFERENCES tb_bill_replacement_site(id_bill_replacement_site),
     total INT NOT NULL,
