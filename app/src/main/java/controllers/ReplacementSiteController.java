@@ -28,12 +28,13 @@ public class ReplacementSiteController {
     ConnectionController connectionDb = new ConnectionController();
     Connection conn;
     String sql;
-
+    
     /* Methods */
     public ArrayList<ReplacementSite> getInventories() throws SQLException {
         ArrayList<ReplacementSite> listReplacementSite = new ArrayList<>();
 
         sql = "SELECT * FROM TB_REPLACEMENT_SITE ORDER BY ID_REPLACEMENT_SITE ASC";
+
         int i = 1;
 
         try {
@@ -47,6 +48,7 @@ public class ReplacementSiteController {
                 r.setId(rs.getInt(1));
                 r.setIdReplacement(rs.getInt(2));
                 r.setReplacement(r.relationReplacement(rs.getInt(2)));
+                r.setIdSite(rs.getInt(3));
                 r.setSite(r.relationSite(rs.getInt(3)));
                 r.setQuantity(rs.getString(4));
                 r.setCreatedAt(rs.getDate(5));
@@ -89,7 +91,7 @@ public class ReplacementSiteController {
         }
     }
 
-    public void getReplacementSite(int id) throws SQLException {
+    public ReplacementSite getReplacementSite(int id) throws SQLException {
         ReplacementSite r = null;
         sql = "SELECT * FROM TB_REPLACEMENT_SITE WHERE ID_REPLACEMENT_SITE = " + id;
 
@@ -108,12 +110,17 @@ public class ReplacementSiteController {
                 r.setUpdatedAt(rs.getDate(6));
             }
 
-            connectionDb.saveData("editReplacementSite", r);
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
             conn.close();
         }
+        
+        return r;
+    }
+    
+    public void edit(int id) throws SQLException {
+        connectionDb.saveData("editReplacementSite", getReplacementSite(id));
     }
 
     public void update(ReplacementSite replacementSite) throws SQLException {

@@ -16,7 +16,8 @@ import javax.inject.Named;
 @Named(value = "service")
 @ApplicationScoped
 public class Service {
-     private int id;
+
+    private int id;
     private int idCar;
     private String price;
     private String descpt;
@@ -79,5 +80,5 @@ public class Service {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-    
+
 }

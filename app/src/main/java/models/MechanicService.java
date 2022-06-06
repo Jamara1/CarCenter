@@ -5,6 +5,8 @@
  */
 package models;
 
+import controllers.MechanicController;
+import java.sql.SQLException;
 import java.util.Date;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -22,7 +24,9 @@ public class MechanicService {
     private int idMechanic;
     private Date createdAt;
     private Date updatedAt;
-
+    
+    private Mechanic mechanic;
+    
     public int getIndex() {
         return index;
     }
@@ -61,5 +65,19 @@ public class MechanicService {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Mechanic getMechanic() {
+        return mechanic;
+    }
+
+    public void setMechanic(Mechanic mechanic) {
+        this.mechanic = mechanic;
+    }    
+    
+    public Mechanic relationMechanic(int id) throws SQLException {
+        MechanicController mechanicController = new MechanicController();
+        
+        return mechanicController.getMechanic(id);
     }
 }

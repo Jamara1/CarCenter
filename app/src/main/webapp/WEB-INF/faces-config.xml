@@ -227,9 +227,14 @@
             <to-view-id>/pages/bill/bill-show.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-action>#{billNav.create}</from-action>
-            <from-outcome>bill-create</from-outcome>
-            <to-view-id>/pages/bill/bill-create.xhtml</to-view-id>
+            <from-action>#{billNav.createService}</from-action>
+            <from-outcome>bill-service-create</from-outcome>
+            <to-view-id>/pages/bill/create/service-create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{billNav.createReplacement}</from-action>
+            <from-outcome>bill-replacement-create</from-outcome>
+            <to-view-id>/pages/bill/create/replacement-create.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-action>#{billNav.edit}</from-action>

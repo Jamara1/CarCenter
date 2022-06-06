@@ -108,7 +108,7 @@ public class MechanicController {
         }
     }
 
-    public void getMechanic(int id) throws SQLException {
+    public Mechanic getMechanic(int id) throws SQLException {
         Mechanic m = null;
         sql = "SELECT * FROM TB_MECHANIC WHERE ID_MECHANIC = " + id;
 
@@ -124,6 +124,12 @@ public class MechanicController {
                 m.setLastName(rs.getString(3));
                 m.setFirstSurname(rs.getString(4));
                 m.setSecondSurname(rs.getString(5));
+                m.setFullName(m.strFullName(
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)
+                ));
                 m.setIdDocumentType(rs.getInt(6));
                 m.setDocumentNumber(rs.getString(7));
                 m.setCellphone(rs.getString(8));
@@ -133,13 +139,17 @@ public class MechanicController {
                 m.setCreatedAt(rs.getDate(12));
                 m.setUpdatedAt(rs.getDate(13));
             }
-
-            connectionDb.saveData("editMechanic", m);
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
             conn.close();
         }
+        
+        return m;
+    }
+    
+    public void edit(int id) throws SQLException {
+        connectionDb.saveData("editMechanic", getMechanic(id));
     }
 
     public void update(Mechanic mechanic) throws SQLException {

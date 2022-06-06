@@ -5,25 +5,9 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-                template="/template/template.xhtml">
+                template="/pages/bill/bill-create.xhtml">
 
-    <ui:define name="head">
-        <title>CC | Factura</title>
-    </ui:define>
-
-    <ui:define name="body">
-        <div class="row">
-            <div class="col-6">
-                <h2>Crear factura</h2>
-            </div>
-            <div class="col-6 mt-1 text-end">
-                <h:form>
-                    <h:commandLink class="btn btn-danger" value="Regresar" action="#{billNav.index}"/>
-                </h:form>
-            </div>
-        </div>
-        <hr></hr>
-
+    <ui:define name="bill-body">
         <div class="card p-5">
             <h:form>
                 <div class="row">
@@ -32,20 +16,32 @@
                         <hr></hr>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-5">
                         <h:outputLabel class="form-label" value="Cliente"/>
-                        <h:selectOneMenu class="col-12 form-select">
-                            <f:selectItem itemLabel="Seleccione..."/>
+                        <h:selectOneMenu class="col-12 form-select" value="#{client.id}">
+                            <f:selectItem itemLabel="Seleccione..." itemValue="0"/>
                             <f:selectItems value="#{clientController.getClients(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{data.fullName}"/>
+
+                            <f:ajax event="change" render="selectCar" execute="@this" listener="#{carController.getCarClient(client.id)}"/>
                         </h:selectOneMenu>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <h:outputLabel class="form-label" value="Vehiculo"/>
-                        <h:selectOneMenu class="col-12 form-select" value="#{service.idCar}">
+                        <h:selectOneMenu class="col-12 form-select" id="selectCar" value="#{service.idCar}">
                             <f:selectItem itemLabel="Seleccione..."/>
-                            <f:selectItems value="#{carController.getCars(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.placa}"/>
+                            <f:selectItems value="#{carController.listCar}" var="data" itemValue="#{data.id}" itemLabel="#{data.placa}"/>
                         </h:selectOneMenu>
+                    </div>
+
+                    <div class="col-3">
+                        <h:outputLabel class="form-label" value="Precio"/>
+                        <h:inputText class="form-control" id="price" value="#{service.price}"
+                                     autocomplete="off"
+                                     required="true"
+                                     requiredMessage="Precio es obligatorio"/>
+                        
+                        <h:message class="fw-light text-danger" for="price"/>
                     </div>
 
                     <div class="col-12 mt-2">
@@ -55,49 +51,47 @@
 
                     <div class="col-11 mt-2">
                         <h:outputLabel class="form-label" value="Mecanico"/>
-                        <h:selectOneMenu class="col-12 form-select" value="#{mechanicService.idMechanic}">
+                        <h:selectOneMenu class="col-12 form-select" value="#{mechanicSController.mechanicService.idMechanic}">
                             <f:selectItem itemLabel="Seleccione..."/>
                             <f:selectItems value="#{mechanicController.getMechanics(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{data.fullName}"/>
                         </h:selectOneMenu>
                     </div>
 
                     <div class="col-1 mt-4 text-end">
-                        <h:commandLink class="btn btn-dark mt-3" action="#{siteNav.post(site)}">
+                        <h:commandLink class="btn btn-dark mt-3" action="#{mechanicSController.addMechanic()}">
                             <i class="fa-solid fa-plus"></i>
                         </h:commandLink>
                     </div>
 
-                    <h:dataTable class="table table-bordered mt-4 animate__animated animate__fadeIn" value="#{billMSController.mechanics}" var="data"
-                                 rendered="#{billMSController.mechanics.size()>0}">
+                    <div class="col-12">
+                        <h:dataTable class="table table-bordered mt-4 animate__animated animate__fadeIn" value="#{mechanicSController.listMechanic}" var="data">
+                            <h:column>
+                                <f:facet name="header"># Documento</f:facet>
+                                <h:outputLabel class="fw-bold" value="#{data.mechanic.documentNumber}"/>
+                            </h:column>
 
-                        <h:column>
-                            <f:facet name="header">#</f:facet>
-                            <h:outputLabel class="fw-bold" value="#{data.index}"/>
-                        </h:column>
+                            <h:column>
+                                <f:facet name="header">Mecanico</f:facet>
+                                <h:outputLabel value="#{data.mechanic.fullName}"/>
+                            </h:column>
 
-                        <h:column>
-                            <f:facet name="header">Mecanico</f:facet>
-                            <h:outputLabel value="#{data.fullName}"/>
-                        </h:column>
+                            <h:column class="text-center">
+                                <f:facet name="header">Opciones</f:facet>
 
-                        <h:column class="text-center">
-                            <f:facet name="header">Opciones</f:facet>
+                                <h:commandLink class="btn btn-danger me-2" action="#{mechanicSController.destroy(data)}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
 
-                            <h:commandLink class="btn btn-primary me-2" action="#{billMSNav.delete(data)}">
-                                <i class="fa-solid fa-unlock"></i>
-                            </h:commandLink>
-                        </h:column>
-
-                    </h:dataTable>
-                </div>
-
-                <div class="col-12 mt-5 text-end">
-                    <h:commandLink class="btn btn-dark" action="#{clientNav.post(client)}">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </h:commandLink>
+                    <div class="col-12 mt-5 text-end">
+                        <h:commandLink class="btn btn-dark" action="#{billNav.createReplacement}">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </h:commandLink>
+                    </div>
                 </div>
             </h:form>
-
         </div>
     </ui:define>
 </ui:composition>

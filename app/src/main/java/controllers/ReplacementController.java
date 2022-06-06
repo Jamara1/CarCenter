@@ -101,9 +101,10 @@ public class ReplacementController {
                 r = new Replacement();
                 r.setId(rs.getInt(1));
                 r.setName(rs.getString(2));
-                r.setStatus(rs.getBoolean(3));
-                r.setCreatedAt(rs.getDate(4));
-                r.setUpdatedAt(rs.getDate(5));
+                r.setPrice(rs.getString(3));
+                r.setStatus(rs.getBoolean(4));
+                r.setCreatedAt(rs.getDate(5));
+                r.setUpdatedAt(rs.getDate(6));
             }
         } catch (SQLException e) {
             System.out.println(e);

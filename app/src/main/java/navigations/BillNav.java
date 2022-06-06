@@ -29,8 +29,12 @@ public class BillNav {
         return "bill-show";
     }
 
-    public String create() {
-        return "bill-create";
+    public String createService() {
+        return "bill-service-create";
+    }
+    
+    public String createReplacement() {
+        return "bill-replacement-create";
     }
 
     public String post(Bill bill) throws SQLException {

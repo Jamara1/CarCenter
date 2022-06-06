@@ -21,6 +21,7 @@ public class Bill {
     private int id;
     private int idBillService;
     private int idBillReplacementSite;
+    private int total;
     private boolean status;
     private Date createdAt;
     private Date updatedAt;
@@ -55,6 +56,14 @@ public class Bill {
 
     public void setIdBillReplacementSite(int idBillReplacementSite) {
         this.idBillReplacementSite = idBillReplacementSite;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public boolean isStatus() {

@@ -5,99 +5,107 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-                template="/template/template.xhtml">
+                template="/pages/bill/bill-create.xhtml">
 
-    <ui:define name="head">
-        <title>CC | Factura</title>
-    </ui:define>
-
-    <ui:define name="body">
-        <div class="row">
-            <div class="col-6">
-                <h2>Crear factura</h2>
-            </div>
-            <div class="col-6 mt-1 text-end">
-                <h:form>
-                    <h:commandLink class="btn btn-danger" value="Regresar" action="#{billNav.index}"/>
-                </h:form>
-            </div>
-        </div>
-        <hr></hr>
-
+    <ui:define name="bill-body">
         <div class="card p-5">
             <h:form>
                 <div class="row">
                     <div class="col-12">
-                        <h4>Servicio</h4>
+                        <h4>Repuestos</h4>
                         <hr></hr>
                     </div>
 
                     <div class="col-6">
-                        <h:outputLabel class="form-label" value="Cliente"/>
-                        <h:selectOneMenu class="col-12 form-select">
+                        <h:outputLabel class="form-label" value="Sede"/>
+                        <h:selectOneMenu class="col-12 form-select" id="selectSite" value="#{billReplacementSController.billReplacementSite.idSite}">
                             <f:selectItem itemLabel="Seleccione..."/>
-                            <f:selectItems value="#{clientController.getClients(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{data.fullName}"/>
+                            <f:selectItems value="#{siteController.getSites(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.name}"/>
+                            <f:ajax event="change" render="selectReplacement" execute="selectSite" listener="#{billReplacementSController.getReplacementSite(billReplacementSController.billReplacementSite.idSite)}"/>
                         </h:selectOneMenu>
                     </div>
 
                     <div class="col-6">
-                        <h:outputLabel class="form-label" value="Vehiculo"/>
-                        <h:selectOneMenu class="col-12 form-select" value="#{service.idCar}">
+                        <h:outputLabel class="form-label" value="Producto"/>
+                        <h:selectOneMenu class="col-12 form-select" id="selectReplacement" value="#{billReplacementSController.billReplacementSite.idReplacement}">
                             <f:selectItem itemLabel="Seleccione..."/>
-                            <f:selectItems value="#{carController.getCars(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.placa}"/>
+                            <f:selectItems value="#{billReplacementSController.listReplacementSite}" var="data" itemValue="#{data.idReplacement}" itemLabel="#{data.replacement.name}"/>
+                            <f:ajax event="change" render="quantityCurrent" execute="selectReplacement" listener="#{billReplacementSController.updateQuantity(replacement.id)}"/>
+                            <f:ajax event="change" render="price" execute="selectReplacement" listener="#{billReplacementSController.updateQuantity(billReplacementSController.billReplacementSite.idReplacement)}"/>
                         </h:selectOneMenu>
                     </div>
 
-                    <div class="col-12 mt-2">
-                        <h:outputLabel class="form-label" value="Descripción"/>
-                        <h:inputTextarea class="form-control" value="#{service.descpt}"/>
+                    <div class="col-4 mt-2">
+                        <h:outputLabel class="form-label" value="Cantidad disponible"/>
+                        <h:inputText class="form-control" id="quantityCurrent" value="#{billReplacementSController.quantity}" disabled="true"/>
                     </div>
 
-                    <div class="col-11 mt-2">
-                        <h:outputLabel class="form-label" value="Mecanico"/>
-                        <h:selectOneMenu class="col-12 form-select" value="#{mechanicService.idMechanic}">
-                            <f:selectItem itemLabel="Seleccione..."/>
-                            <f:selectItems value="#{mechanicController.getMechanics(true)}" var="data" itemValue="#{data.id}" itemLabel="#{data.documentNumber} - #{data.fullName}"/>
-                        </h:selectOneMenu>
+                    <div class="col-4 mt-2">
+                        <h:outputLabel class="form-label" value="Precio x unidad"/>
+                        <h:inputText class="form-control" id="price" value="#{billReplacementSController.price}" disabled="true"/>
                     </div>
 
-                    <div class="col-1 mt-4 text-end">
-                        <h:commandLink class="btn btn-dark mt-3" action="#{siteNav.post(site)}">
+                    <div class="col-4 mt-2">
+                        <h:outputLabel class="form-label" value="Cantidad a llevar"/>
+                        <h:inputText class="form-control" id="quantity"
+                                     value="#{billReplacementSController.billReplacementSite.quantity}"
+                                     required="true"
+                                     requiredMessage="Cantidad es obligatoria">
+
+                            <f:validateLongRange minimum="1" maximum="#{billReplacementSController.quantity}" />
+                        </h:inputText>
+
+                        <h:message for="quantity" class="text-danger fs-6 fw-light"></h:message>
+                    </div>
+
+                    <div class="col-12 mt-2 text-end">
+                        <h:commandLink class="btn btn-dark" action="#{billReplacementSController.addBillReplacementSite()}">
                             <i class="fa-solid fa-plus"></i>
                         </h:commandLink>
                     </div>
 
-                    <h:dataTable class="table table-bordered mt-4 animate__animated animate__fadeIn" value="#{billMSController.mechanics}" var="data"
-                                 rendered="#{billMSController.mechanics.size()>0}">
+                    <div class="col-12">
+                        <h:dataTable class="table table-bordered mt-4 animate__animated animate__fadeIn" value="#{billReplacementSController.listReplacementAdd}" var="data">
+                            <h:column>
+                                <f:facet name="header">Sede</f:facet>
+                                <h:outputLabel value="#{data.site.name}"/>
+                            </h:column>
 
-                        <h:column>
-                            <f:facet name="header">#</f:facet>
-                            <h:outputLabel class="fw-bold" value="#{data.index}"/>
-                        </h:column>
+                            <h:column>
+                                <f:facet name="header">Repuesto</f:facet>
+                                <h:outputLabel value="#{data.replacement.name}"/>
+                            </h:column>
 
-                        <h:column>
-                            <f:facet name="header">Mecanico</f:facet>
-                            <h:outputLabel value="#{data.fullName}"/>
-                        </h:column>
+                            <h:column>
+                                <f:facet name="header">Cantidad</f:facet>
+                                <h:outputLabel value="#{data.quantity}"/>
+                            </h:column>
 
-                        <h:column class="text-center">
-                            <f:facet name="header">Opciones</f:facet>
+                            <h:column>
+                                <f:facet name="header">Subtotal</f:facet>
+                                <h:outputLabel value="$ #{data.subtotal}"/>
+                            </h:column>
 
-                            <h:commandLink class="btn btn-primary me-2" action="#{billMSNav.delete(data)}">
-                                <i class="fa-solid fa-unlock"></i>
-                            </h:commandLink>
-                        </h:column>
+                            <h:column class="text-center">
+                                <f:facet name="header">Opciones</f:facet>
 
-                    </h:dataTable>
+                                <h:commandLink class="btn btn-danger me-2" action="#{billReplacementSController.destroy(data)}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-2">
+                    <h:outputLabel class="form-label fw-bold me-2" value="Total"/>
+                    <h:outputLabel class="w-100 py-2 px-4 card bg-dark bg-opacity-10 text-dark text-end" value="$ #{service.price + billReplacementSController.subtotal}"/>
                 </div>
 
                 <div class="col-12 mt-5 text-end">
-                    <h:commandLink class="btn btn-dark" action="#{clientNav.post(client)}">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </h:commandLink>
+                    <h:commandLink class="btn btn-dark" value="Enviar" action="#{billNav.createReplacement}"/>
                 </div>
             </h:form>
-
         </div>
     </ui:define>
 </ui:composition>

@@ -6,12 +6,13 @@
 package controllers;
 
 import db.ConnectionController;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import models.Car;
 
@@ -20,8 +21,11 @@ import models.Car;
  * @author jamar
  */
 @Named(value = "carController")
-@RequestScoped
-public class CarController {
+@ViewScoped
+public class CarController implements Serializable {
+
+    private ArrayList<Car> listCar = new ArrayList<>();
+
     /* SQL */
     PreparedStatement ps;
     ResultSet rs;
@@ -29,16 +33,57 @@ public class CarController {
     Connection conn;
     String sql;
 
+    public ArrayList<Car> getListCar() {
+        return listCar;
+    }
+
+    public void setListCar(ArrayList<Car> listCar) {
+        this.listCar = listCar;
+    }
+
     /* Methods */
     public ArrayList<Car> getCars(boolean option) throws SQLException {
-        ArrayList<Car> listCar = new ArrayList<>();
-
+        listCar = new ArrayList<>();
         if (option) {
             sql = "SELECT * FROM TB_CAR WHERE STATUS = 1 ORDER BY ID_CAR ASC";
         } else {
             sql = "SELECT * FROM TB_CAR ORDER BY ID_CAR ASC";
         }
-        
+
+        int i = 1;
+
+        try {
+            conn = connectionDb.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Car c = new Car();
+                c.setIndex(i++);
+                c.setId(rs.getInt(1));
+                c.setIdClient(rs.getInt(2));
+                c.setClient(c.relationClient(rs.getInt(2)));
+                c.setPlaca(rs.getString(3));
+                c.setBrand(rs.getString(4));
+                c.setStatus(rs.getBoolean(5));
+                c.setCreatedAt(rs.getDate(6));
+                c.setUpdatedAt(rs.getDate(7));
+
+                listCar.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            conn.close();
+        }
+
+        return listCar;
+    }
+
+    /* Methods */
+    public ArrayList<Car> getCarClient(int id) throws SQLException {
+        sql = "SELECT * FROM TB_CAR WHERE ID_CLIENT = "+ id +" AND STATUS = 1 ORDER BY ID_CAR ASC";
+
         int i = 1;
 
         try {
